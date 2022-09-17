@@ -8,15 +8,17 @@ html {
   font-size: 16px;
 }
 
-main.desktop {
+main {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   background: linear-gradient(111.16deg, #660708 -6.65%, #E5383B 99.11%, #E5383B 99.11%);
 }
+
 main.desktop div.container {
   width: 100%;
   height: 100%;
@@ -46,4 +48,39 @@ main.desktop div.container button.add-task-btn {
   position: absolute;
   bottom: 50px;
   right: 50px;
+}
+
+main.mobile div.container {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+}
+main.mobile section.date {
+  flex-basis: 140px;
+  background-color: beige;
+}
+main.mobile section.tasks {
+  flex-grow: 1;
+  background-color: antiquewhite;
+}
+main.mobile aside {
+  flex-basis: 60px;
+  background-color: red;
+  align-self: stretch;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+.modal.active {
+  display: block;
 }

@@ -8,11 +8,29 @@ const templates = {
         <aside>ASIDE</aside>
         <button class="add-task-btn">ADD TASK</button>
     </div>
-    
-    <div class="add-task-modal"></div>
-    <div class="delete-task-modal"></div>
-
     </main>`,
-    mobileFramework: '<h1>Mobile</h1>',
+
+    desktopAddTaskModal: `
+    <div class="modal add-task-modal">
+        ADD TASK
+        <button class="cancel-task-btn">CANCEL</button>
+        <button class="confirm-task-btn">CONFIRM</button>
+    </div>`,
+
+    desktopDeleteTaskModal: `
+    <div class="modal delete-task-modal">
+        DELETE TASK
+        <button class="delete-once-btn>DELETE ONCE</button>
+        <button class="delete-each-btn>DELETE EACH</button>
+    </div>`,
+
+    mobileFramework: `
+    <main class="mobile">
+    <div class="container">
+        <section class="date">DATE</section>
+        <section class="tasks">TASKS</section>
+        <aside>ASIDE</aside>
+    </div>
+    </main>`,
 }
 export default templates;
