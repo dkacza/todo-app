@@ -29,8 +29,32 @@ const templates = {
     <div class="container">
         <section class="date">DATE</section>
         <section class="tasks">TASKS</section>
-        <aside>ASIDE</aside>
+        <aside>
+            <button class="callendar-btn">CALLENDAR</button>
+            <button class="add-task-btn">ADD TASK</button>
+        </aside>
     </div>
     </main>`,
+
+    mobileAddTaskModal: `
+    <div class="modal add-task-modal">
+        ADD TASK
+        <button class="cancel-task-btn">CANCEL</button>
+        <button class="confirm-task-btn">CONFIRM</button>
+    </div>`,
+
+    mobileDeleteTaskModal: `
+    <div class="modal delete-task-modal">
+        DELETE TASK
+        <button class="delete-once-btn>DELETE ONCE</button>
+        <button class="delete-each-btn>DELETE EACH</button>
+    </div>`,
+
+    mobileCallendarModal: `
+    <div class="modal callendar-modal">
+        CALLENDAR
+        <button class="cancel-callendar-btn">CANCEL</button>
+    </div>
+    `
 }
 export default templates;

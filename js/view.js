@@ -10,24 +10,32 @@ const view = {
 
     // FUNCTIONS
     loadHTML: function(viewType) {
-        console.log(viewType);
+        this.viewType = viewType;
         if(viewType == 'desktop') {
             this.domBody.innerHTML = '';
             this.domBody.innerHTML = templates.desktopFramework;
             this.domBody.innerHTML += templates.desktopAddTaskModal;
             this.domBody.innerHTML += templates.desktopDeleteTaskModal;
-            this.getDomElements();
+            
         }
         if(viewType == 'mobile') {
             this.domBody.innerHTML = '';
             this.domBody.innerHTML = templates.mobileFramework;
+            this.domBody.innerHTML += templates.mobileAddTaskModal;
+            this.domBody.innerHTML += templates.mobileDeleteTaskModal;
+            this.domBody.innerHTML += templates.mobileCallendarModal;
         }
+        this.getDomElements();
     },
     
     getDomElements: function() {
         this.mainElement = document.querySelector('main');
         this.addTaskButton = document.querySelector('.add-task-btn');
         this.addTaskButton.addEventListener('click', this.renderAddTaskModal.bind(this))
+        if(this.viewType == 'mobile') {
+            this.callendarButton = document.querySelector('.callendar-btn');
+            this.callendarButton.addEventListener('click', this.renderCallendarModal.bind(this));
+        }
         
     },
 
@@ -45,14 +53,15 @@ const view = {
         confirmTaskButton.addEventListener('click', this.closeModal.bind(this, this.addTaskModal))
     },
 
-    renderDeleteTaskModal: function() {
+    renderCallendarModal: function() {
+        console.log('render callendar modal');
+        this.callendarModal = document.querySelector('.callendar-modal');
+        this.callendarModal.classList.add('active');
 
+        const cancelCallendarButton = document.querySelector('.cancel-callendar-btn');
+        cancelCallendarButton.addEventListener('click', this.closeModal.bind(this, this.callendarModal));
     },
 
-    extendTask: function() {
-
-    },
-    
     closeModal: function(modal) {
         modal.classList.remove('active');
     }

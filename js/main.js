@@ -10,7 +10,6 @@ window.addEventListener('resize', () => {
     if(window.innerWidth > WIDTH_BREAKPOINT && view.currentSize != 'desktop') {
         view.currentSize = 'desktop'
         view.loadHTML('desktop');
-        view.getDomElements();
         return;
     }
     if(window.innerWidth <= WIDTH_BREAKPOINT && view.currentSize != 'mobile') {
