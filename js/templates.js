@@ -259,12 +259,12 @@ const templates = {
             </section>
 
             <section class="buttons">
-                <button class="extend">
+                <button class="extend-task-btn">
                     <span class="material-symbols-rounded large">
                         expand_more
                         </span>
                 </button>
-                <button class="delete">
+                <button class="delete-task-btn">
                     <span class="material-symbols-rounded medium">
                         delete
                         </span>

@@ -93,3 +93,16 @@ main.mobile aside {
 .callendar {
   overflow: hidden;
 }
+
+main div.task button.delete-task-btn {
+  display: none;
+}
+main div.task .description {
+  display: none;
+}
+main div.task.extended button.delete-task-btn {
+  display: block;
+}
+main div.task.extended .description {
+  display: block;
+}

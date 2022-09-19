@@ -89,3 +89,22 @@ main.mobile {
 .callendar {
     overflow: hidden;
 }
+main {
+    div.task {
+        button.delete-task-btn {
+            display: none;
+        }
+        .description {
+            display: none;
+        }
+    }
+    div.task.extended {
+        button.delete-task-btn {
+            display: block;
+        }
+        .description {
+            display: block;
+        }
+    }
+    
+}
