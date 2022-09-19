@@ -1,4 +1,5 @@
 import templates from "./templates.js";
+import {tasks} from './main.js';
 
 const view = {
     currentSize: null,
@@ -16,7 +17,6 @@ const view = {
             this.domBody.innerHTML = templates.desktopFramework;
             this.domBody.innerHTML += templates.desktopAddTaskModal;
             this.domBody.innerHTML += templates.desktopDeleteTaskModal;
-            
         }
         if(viewType == 'mobile') {
             this.domBody.innerHTML = '';
@@ -36,6 +36,16 @@ const view = {
             this.callendarButton = document.querySelector('.callendar-btn');
             this.callendarButton.addEventListener('click', this.renderCallendarModal.bind(this));
         }
+
+        this.dateSection = document.querySelector('section.date');
+        this.dateSection.innerHTML = templates.generateDateSectionTemplate('22-07-2022');
+        console.log(this.dateSection);
+
+        this.taskSection = document.querySelector('section.tasks');
+        tasks.forEach((task) => {
+            this.taskSection.innerHTML += task.htmlTemplate;
+        })
+
         
     },
 
