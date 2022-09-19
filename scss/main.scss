@@ -36,7 +36,12 @@ main.desktop {
         }
         div.callendar {
             grid-area: callendar;
+            display: flex;
             background-color: azure;
+            section.days {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+            }
         }
         button.add-task-btn {
             position: absolute;
@@ -80,4 +85,7 @@ main.mobile {
 }
 .modal.active {
     display: block;
+}
+.callendar {
+    overflow: hidden;
 }
