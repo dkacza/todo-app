@@ -1,5 +1,5 @@
 import templates from "./templates.js";
-import { currentDay, mainMap } from "./main.js";
+import { currentDay, DAY_MILISEC, mainMap, setDate } from "./main.js";
 
 const view = {
     body: document.querySelector('body'),
@@ -39,7 +39,19 @@ const view = {
         // Date Section
         // IN PROGRESS ADD EVENTS
         this.dateSection.innerHTML = templates.generateDateSectionTemplate(currentDay);
-
+        this.dateSection.querySelector('button.previous').addEventListener('click', () => {
+            let newDate = new Date(currentDay);
+            newDate.setDate(newDate.getDate() - 1);
+            setDate(newDate);
+            this.fillSections();
+        })
+        this.dateSection.querySelector('button.next').addEventListener('click', () => {
+            let newDate = new Date(currentDay);
+            newDate.setDate(newDate.getDate() + 1);
+            setDate(newDate);
+            console.log('next');
+            this.fillSections();
+        })
         // Task Section
         // IN PROGRESS ADD HANDLERS FOR THE EXTENSION BUTTONS
         this.taskSection.innerHTML = '';
@@ -48,7 +60,7 @@ const view = {
         }
 
         if(this.viewType == 'desktop') {
-            // Callendar
+            // Callendar Section
             this.callendar.innerHTML = templates.generateCallendarTemplate(currentDay);
         } else {
 

@@ -1,4 +1,4 @@
-import {mainMap, currentDay, compareDates, DAY_MILISEC} from '../js/main.js';
+import {mainMap, currentDay, compareDates, DAY_MILISEC, today} from '../js/main.js';
 
 const templates = {
     desktopFramework: `
@@ -207,14 +207,18 @@ const templates = {
         const monthStr = monthNames[month];
 
         let weekday = date.getDay();
-        const weekdayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        const weekdayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         let weekdayStr = weekdayNames[weekday];
 
         let title;
-        if(compareDates(currentDay, date)) title = 'Today';
-        else if (compareDates(currentDay - DAY_MILISEC, date)) title = 'Yesterday';
-        else if (compareDates(currentDay - DAY_MILISEC, date)) title = 'Tommorow';
-        else title = weekday;
+        let yesterday = new Date(currentDay);
+        yesterday.setDate(yesterday.getDate() - 1);
+        let tommorow = new Date(currentDay);
+        tommorow.setDate(tommorow.getDate() + 1);
+        if(compareDates(currentDay, today)) title = 'Today';
+        else if (compareDates(today, yesterday)) title = 'Tommorow';
+        else if (compareDates(today, tommorow)) title = 'Yesterday';
+        else title = weekdayNames[weekday];
 
         let dateString = `${title == weekdayStr ? '' : `${weekdayStr},`} ${dayStr} of ${monthStr}`;
 
