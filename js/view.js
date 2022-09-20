@@ -1,5 +1,5 @@
 import templates from "./templates.js";
-import { currentDay, DAY_MILISEC, mainMap, setDate } from "./main.js";
+import { currentDate } from "./main.js";
 
 const view = {
     body: document.querySelector('body'),
@@ -13,14 +13,15 @@ const view = {
         this.getDomElements();
         this.fillSections();
     },
+
     checkResize: function() {
         const newViewType = (window.innerWidth >= this.WIDTH_BREAKPOINT ? 'desktop' : 'mobile');
         if (newViewType == this.viewType) return;
         console.log('resize');
         this.loadHTMLFramework(newViewType);
     },
-    // Gets all the dom elements in from the framework.
-    // Doesn't get buttons from the modals.
+
+
     getDomElements: function() {
         // Common between mobile and desktop
         this.dateSection = document.querySelector('section.date');
@@ -36,39 +37,41 @@ const view = {
     },
 
     fillSections: function() {
-        // Date Section
-        // DONE
-        this.dateSection.innerHTML = templates.generateDateSectionTemplate(currentDay);
-        this.dateSection.querySelector('button.previous').addEventListener('click', () => {
-            let newDate = new Date(currentDay);
-            newDate.setDate(newDate.getDate() - 1);
-            setDate(newDate);
-            this.fillSections();
-        })
-        this.dateSection.querySelector('button.next').addEventListener('click', () => {
-            let newDate = new Date(currentDay);
-            newDate.setDate(newDate.getDate() + 1);
-            setDate(newDate);
-            this.fillSections();
-        })
-        // Task Section
-        // IN PROGRESS ADD HANDLERS FOR THE EXTENSION BUTTONS
-        this.taskSection.innerHTML = '';
-        for(const value of mainMap.values()) {
-            this.taskSection.innerHTML += value.htmlTemplate;
-            const extendBtn = document.querySelector('.extend-task-btn');
-            extendBtn.addEventListener('click', (e) => {
-                console.log(e.path[3].classList.toggle('extended'));
-                
-            })
-        }
+        this.dateSection.innerHTML = '';
+        this.dateSection.innerHTML = templates.generateDateSectionTemplate(currentDate);
+
 
         if(this.viewType == 'desktop') {
-            // Callendar Section
-            this.callendar.innerHTML = templates.generateCallendarTemplate(currentDay);
+            this.callendar.innerHTML = templates.generateCallendarTemplate(currentDate);
         } else {
-
+            this.callendarButton.addEventListener('click', () => {
+                console.log('set callendar modal to active');
+            });
         }
+
+        const previousMonthButton = document.querySelector('.left-arrow-btn');
+        const nextMonthButton = document.querySelector('.right-arrow-btn');
+        let callendarDate = new Date(currentDate);
+
+        previousMonthButton.addEventListener('click', () => {          
+            callendarDate.setMonth(callendarDate.getMonth() - 1);
+            templates.updateCallendarTemplate(callendarDate);
+        });
+        nextMonthButton.addEventListener('click', () => {
+            callendarDate.setMonth(callendarDate.getMonth() + 1);
+            templates.updateCallendarTemplate(callendarDate);
+        })
+
+
+        this.dateSection.querySelector('button.previous').addEventListener('click', () => {
+            currentDate.setDate(currentDate.getDate() - 1);
+            templates.updateDateSectionTemplate(currentDate);
+            
+        })
+        this.dateSection.querySelector('button.next').addEventListener('click', () => {
+            currentDate.setDate(currentDate.getDate() + 1);
+            templates.updateDateSectionTemplate(currentDate);
+        })
     },
 };
 export default view;

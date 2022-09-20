@@ -1,4 +1,4 @@
-import {mainMap, currentDay, compareDates, DAY_MILISEC, today} from '../js/main.js';
+import {currentDate, compareDates, todayDate} from '../js/main.js';
 
 const templates = {
     desktopFramework: `
@@ -184,7 +184,85 @@ const templates = {
 
     },
 
+    updateCallendarTemplate: function(date) {
+        const string = this.generateCallendarTemplate(date);
+        let pattern = `<section class="days">`;
+        const startIndex = string.search(pattern) + pattern.length;
+        pattern = `</div></section>`;
+        const endIndex = string.search(pattern) + 6;
+        const substring = string.substring(startIndex, endIndex);
+        console.log(substring);
+
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        let year = date.getYear() + 1900;
+        let month = date.getMonth();
+        const monthStr = monthNames[month];
+
+        document.querySelector('.month-year .month').innerHTML = monthStr;
+        document.querySelector('.month-year .year').innerHTML = year;
+        document.querySelector('section.days').innerHTML = substring;
+    },
+
     generateDateSectionTemplate: function(date) {        
+        let day = date.getDate();
+        let dayStr = String(day);
+        switch(day % 10) {
+            case 1:
+                dayStr += 'st'
+                break;
+            case 2:
+                dayStr += 'nd'
+                break;
+            case 3:
+                dayStr += 'rd'
+                break;
+            default:
+                dayStr += 'th'
+                break; 
+        }
+
+        let month = date.getMonth();
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const monthStr = monthNames[month];
+
+        let weekday = date.getDay();
+        console.log(weekday);
+        const weekdayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        let weekdayStr = weekdayNames[weekday];
+
+        let title = 'something';
+        let yesterday = new Date(currentDate);
+        yesterday.setDate(yesterday.getDate() - 1);
+        let tommorow = new Date(currentDate);
+        tommorow.setDate(tommorow.getDate() + 1);
+        if(compareDates(currentDate, todayDate)) title = 'Today';
+        else if (compareDates(todayDate, yesterday)) title = 'Tommorow';
+        else if (compareDates(todayDate, tommorow)) title = 'Yesterday';
+        else title = weekdayNames[weekday];
+
+        let dateString = `${title == weekdayStr ? '' : `${weekdayStr},`} ${dayStr} of ${monthStr}`;
+        
+
+        return `
+        <div class="date-title">${title}</div>
+        <div class="date-full">${dateString}</div>
+        
+        <section class="date-nav">
+            <button class="previous">
+                <span class="material-symbols-rounded medium">
+                    navigate_before
+                </span>
+                previous
+            </button>
+            <button class="next">
+                next
+                <span class="material-symbols-rounded medium">
+                    navigate_next
+                </span> 
+            </button>
+        </section>`
+    },
+    updateDateSectionTemplate(date) {
         let day = date.getDate();
         let dayStr = String(day);
         switch(day % 10) {
@@ -210,36 +288,22 @@ const templates = {
         const weekdayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         let weekdayStr = weekdayNames[weekday];
 
-        let title;
-        let yesterday = new Date(currentDay);
+        let title = 'something';
+        let yesterday = new Date(currentDate);
         yesterday.setDate(yesterday.getDate() - 1);
-        let tommorow = new Date(currentDay);
+        let tommorow = new Date(currentDate);
         tommorow.setDate(tommorow.getDate() + 1);
-        if(compareDates(currentDay, today)) title = 'Today';
-        else if (compareDates(today, yesterday)) title = 'Tommorow';
-        else if (compareDates(today, tommorow)) title = 'Yesterday';
+        if(compareDates(currentDate, todayDate)) title = 'Today';
+        else if (compareDates(todayDate, yesterday)) title = 'Tommorow';
+        else if (compareDates(todayDate, tommorow)) title = 'Yesterday';
         else title = weekdayNames[weekday];
 
         let dateString = `${title == weekdayStr ? '' : `${weekdayStr},`} ${dayStr} of ${monthStr}`;
-
-        return `
-        <div class="date-title">${title}</div>
-        <div class="date-full">${dateString}</div>
         
-        <section class="date-nav">
-            <button class="previous">
-                <span class="material-symbols-rounded medium">
-                    navigate_before
-                </span>
-                previous
-            </button>
-            <button class="next">
-                next
-                <span class="material-symbols-rounded medium">
-                    navigate_next
-                </span> 
-            </button>
-        </section>`
+        const dateTitleDOM = document.querySelector('.date-title');
+        const dateDescDOM = document.querySelector('.date-full');
+        dateTitleDOM.innerHTML = title;
+        dateDescDOM.innerHTML = dateString;
     },
     generateTaskTemplate: function(title, description, completion) {
         return `
@@ -277,15 +341,15 @@ const templates = {
         if(viewType == 'mobile') {
             result += this.mobileFramework;
 
-            result += this.generateAddTaskModal(currentDay);
-            result += this.generateCallendarModal(currentDay);
+            result += this.generateAddTaskModal(currentDate);
+            result += this.generateCallendarModal(currentDate);
             result += this.generateDeleteTaskModal();
         }
         else {
             result += this.desktopFramework;
 
-            result += this.generateAddTaskModal(currentDay);
-            result += this.generateDeleteTaskModal(currentDay);
+            result += this.generateAddTaskModal(currentDate);
+            result += this.generateDeleteTaskModal(currentDate);
         }
         return result;
     }
