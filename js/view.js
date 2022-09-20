@@ -1,7 +1,6 @@
 import templates from "./templates.js";
 import callendarView from "./callendarView.js";
 import dateView from "./dateView.js";
-import { currentDate } from "./main.js";
 
 const view = {
     body: document.querySelector('body'),

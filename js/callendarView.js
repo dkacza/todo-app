@@ -1,3 +1,5 @@
+import { compareDates, todayDate } from "./main.js";
+
 const callendarView = {
     callendarDate: new Date(),
 
@@ -6,53 +8,59 @@ const callendarView = {
     renderInitial: function() {
         this.callendar = document.querySelector('div.callendar');
         this.callendar.innerHTML = '';
-        this.generateCalendarTemplate();
+        this.generateDayMatrix();
+        this.generateCallendarTemplate();
         this.callendar.innerHTML = this.fullTemplate;
 
         this.previousMonthButton = document.querySelector('.left-arrow-btn');
         this.nextMonthButton = document.querySelector('.right-arrow-btn');
 
-        this.previousMonthButton.addEventListener('click', this.updateCallendar.bind(callendarView, -1));
-        this.nextMonthButton.addEventListener('click', this.updateCallendar.bind(callendarView, 1));
+        this.previousMonthButton.addEventListener('click',() => {
+            const newMonthDate = new Date(this.callendarDate);
+            newMonthDate.setMonth(newMonthDate.getMonth() - 1);
+            this.updateCallendar(newMonthDate);
+        });
+        this.nextMonthButton.addEventListener('click',() => {
+            const newMonthDate = new Date(this.callendarDate);
+            newMonthDate.setMonth(newMonthDate.getMonth() + 1);
+            this.updateCallendar(newMonthDate);
+        });
     },
     // USED FOR CHANGING A MONTH
-    updateCallendar: function(monthDelta) {
-        console.log('month update');
-        this.callendarDate.setMonth(this.callendarDate.getMonth() + monthDelta);
-        
-
-        // THIS LINE FREEZES THE BROWSER
-        this.generateDayTemplate();
-
+    updateCallendar: function(newDate) {
+        this.callendarDate = newDate;
+        this.generateDayMatrix();
+        this.generateCallendarTemplate();
         
         const monthText = document.querySelector('p.month');
         const yearText = document.querySelector('p.year');
-        monthText.innerHTML = this.monthStr;
-        yearText.innerHTML = this.year;
+        monthText.innerHTML = this.callendarMonthStr;
+        yearText.innerHTML = this.callendarYear;
 
         const daysSection = document.querySelector('section.days');
         daysSection.innerHTML = this.dayTemplate;
         
     },
-    // GENERATES DAY SECTION MATRIX
-    // THIS FUNCTION GENERATES THE PROBLEM
     generateDayMatrix: function() {
-        
-        let year = this.callendarDate.getYear() + 1900;
-        let month = this.callendarDate.getMonth();
-        let day = this.callendarDate.getDate();
+        this.callendarYear = this.callendarDate.getYear() + 1900;
+        this.callendarMonth = this.callendarDate.getMonth() + 1;
+        this.callendarDay = this.callendarDate.getDate();
+
+        this.previousCallendarMonth = this.callendarMonth - 1;
+        this.nextCallendarMonth = this.callendarMonth + 1;
+        if(this.previousMonth == 0) this.previousMonth = 12;
+        if(this.nextMonth == 13) this.nextMonth = 1;
 
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        const monthStr = monthNames[month];
-        const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        const callendarMonthStr = monthNames[this.callendarMonth];
+        const monthDays = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        this.callendarMonthStr = monthNames[this.callendarMonth - 1];
 
-        const leapYear = ((year % 4 == 0 && year % 100 != 0) ? true : false);
+        const leapYear = ((this.callendarYear % 4 == 0 && this.callendarYear % 100 != 0) ? true : false);
         if(leapYear) monthDays[1] = 29;
 
-        // FINE UNTIL HERE
-        
-        const dayMatrix = [];
-        let currentDate = day;
+        this.dayMatrix = [];
+        let currentDate = this.callendarDay;
         let dayOfWeek = this.callendarDate.getDay()
 
         // Pushing the date back to the last monday
@@ -60,53 +68,75 @@ const callendarView = {
             dayOfWeek--;
             currentDate--;
         }
-        
-        // DOESNOT WORK BELOW
         // Pushing the date to the first week of the month
         while(currentDate > 0) {
             currentDate -= 7;
         }
         // Filling the Matrix
-        while(currentDate <= monthDays[month]) {
+        let firstWeekFlag = true;
+        while(currentDate <= monthDays[this.callendarMonth]) {
             const week = [];
             for(let i = 0; i < 7; i++) {
-                week.push(currentDate);
+                const dateArray = new Array(currentDate, this.callendarMonth, this.callendarYear);
+                week.push(dateArray);
                 currentDate++;
             }
-            dayMatrix.push(week);
+            
+            if (firstWeekFlag) {
+                const conditionToDelete = !week.find((date) => {
+                    return date[0] == 1
+                })
+                if(conditionToDelete) {
+                    firstWeekFlag = false;
+                    continue;
+                }
+                console.log(conditionToDelete);
+                firstWeekFlag = false;
+            }
+            
+            
+            this.dayMatrix.push(week);
+            firstWeekFlag = false;
         }
-        
+        console.log(this.dayMatrix);
         
         // Fixing the matrix - deleting days like -1, 0 or 32
         // Fix next month
         let firstNextMonthDay = 1;
-        for (let i = 0; i < dayMatrix.length; i++) {
+        for (let i = 0; i < this.dayMatrix.length; i++) {
             for (let j = 0; j < 7; j++) {
-                if(dayMatrix[i][j] > monthDays[month]) {
-                    dayMatrix[i][j] = firstNextMonthDay;
+                if(this.dayMatrix[i][j][0] > monthDays[this.callendarMonth]) {
+                    this.dayMatrix[i][j][0] = firstNextMonthDay;
+                    this.dayMatrix[i][j][1] = this.nextCallendarMonth;
+                    if(this.dayMatrix[i][j][1] == 11) {
+                        this.dayMatrix[i][j][1] = 0;
+                        this.dayMatrix[i][j][2] += 1;
+                    }
                     firstNextMonthDay++;
                 }
             }
         }
         // Fix previous month
-        let lastNextMonthDay = monthDays[month - 1]
-        for (let i = dayMatrix.length - 1; i >= 0; i--) {
+        let lastPreviousMonthDay;
+        if(this.dayMatrix[0][0][1] == 1) lastPreviousMonthDay = 31;
+        else lastPreviousMonthDay = monthDays[this.previousCallendarMonth];
+        
+        for (let i = this.dayMatrix.length - 1; i >= 0; i--) {
             for (let j = 6; j >= 0; j--) {
-                if(dayMatrix[i][j] < 1) {
-                    dayMatrix[i][j] = lastNextMonthDay;
-                    lastNextMonthDay--;
+                if(this.dayMatrix[i][j][0] < 1) {
+                    this.dayMatrix[i][j][0] = lastPreviousMonthDay;
+                    this.dayMatrix[i][j][1] = this.previousCallendarMonth;
+                    if(this.dayMatrix[0][0][1] == 0) {
+                        this.dayMatrix[i][j][2] = this.callendarYear - 1;
+                    }
+                    lastPreviousMonthDay--;
                 }
             }
         }
-        this.day = day;
-        this.year = year;
-        this.monthStr = monthStr;
-        this.dayMatrix = dayMatrix;
+        console.log(this.dayMatrix);
     },
     // GENERATES TEMPLATE FOR DAYS
     generateDayTemplate: function() {
-        this.generateDayMatrix();
-
         let resultTemplate = 
         `<div class="day desc">mon</div>
         <div class="day desc">tue</div>
@@ -115,23 +145,27 @@ const callendarView = {
         <div class="day desc">fri</div>
         <div class="day desc">sat</div>
         <div class="day desc">sun</div>`;
-        let previousMonthFlag = true;
+
         for(const week of this.dayMatrix) {
-            for (const currDay of week) {
+            for(const currDay of week) {
                 let classes = `day`
-                if(currDay == 1) previousMonthFlag = false;
-                if(previousMonthFlag && this.day > 1) classes += ' gray';
-                if(week.indexOf(currDay) == 6) classes += ' sun';
-                if(currDay == this.day) classes += ' current';
-                
-                const dayTemplate = `<div class="${classes}">${currDay}</div>`
+                // PREVIOUS OR NEXT MONTH CLASS
+                if(currDay[1] == this.previousCallendarMonth || currDay[1] == this.nextCallendarMonth) classes += ` gray`;
+                // SUNDAY CLASS
+                if(week.indexOf(currDay) == 6) classes += ` sun`;
+                // TODAY CLASS
+                if(todayDate.getDate() == currDay[0] &&
+                todayDate.getMonth() == currDay[1] - 1 &&
+                todayDate.getYear() + 1900 == currDay[2]) classes += ` today`;
+
+                const dayTemplate = `<div class="${classes}" data-date="${currDay[0]}-${currDay[1]}-${currDay[2]}">${currDay[0]}</div>`
                 resultTemplate += dayTemplate;
             }
         }
         this.dayTemplate = resultTemplate;
     },
     // GENERATES FULL TEMPLATE
-    generateCalendarTemplate: function() {
+    generateCallendarTemplate: function() {
         this.generateDayTemplate();
         
         let resultTemplate = `
@@ -142,8 +176,8 @@ const callendarView = {
                     </span>
             </button>
             <div class="text">
-                <p class="month">${this.monthStr}</p>
-                <p class="year">${this.year}</p>
+                <p class="month">${this.callendarMonthStr}</p>
+                <p class="year">${this.callendarYear}</p>
             </div>
             <button class="right-arrow-btn arrow">
                 <span class="material-symbols-rounded large">

@@ -7,6 +7,13 @@ export const compareDates = function(date1, date2) {
     date1.getYear() == date2.getYear()); 
 }
 
+Date.prototype.stringYMD = function() {
+    let day = this.getDate();
+    let month = this.getMonth() + 1;
+    let year = this.getFullYear();
+    return `${day}-${month}-${year}`;
+}
+
 class Task {
     constructor(title, description, date, reccurence, completion) {
         this.title = title;

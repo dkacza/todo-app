@@ -13,21 +13,13 @@ const dateView = {
         const nextDayButton = this.dateSection.querySelector('button.next');
 
         previousDayButton.addEventListener('click', () => {
-            const monthBeforeChange = currentDate.getMonth();
             currentDate.setDate(currentDate.getDate() - 1);
             this.updateDate();
-            const monthAfterChange = currentDate.getMonth();
-            const monthDelta = monthAfterChange - monthBeforeChange;
-            if(monthDelta != 0) callendarView.updateCallendar(monthDelta);
             
         });
         nextDayButton.addEventListener('click', () => {
-            const monthBeforeChange = currentDate.getMonth();
             currentDate.setDate(currentDate.getDate() + 1);
             this.updateDate();
-            const monthAfterChange = currentDate.getMonth();
-            const monthDelta = monthAfterChange - monthBeforeChange;
-            if(monthDelta != 0) callendarView.updateCallendar(monthDelta);
         });
     },
     updateDate: function() {
