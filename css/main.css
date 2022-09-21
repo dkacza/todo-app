@@ -75,6 +75,7 @@ main.mobile aside {
   left: 50%;
   transform: translate(-50%, -50%);
   display: none;
+  background-color: aquamarine;
 }
 
 .modal.active {
@@ -96,6 +97,14 @@ main div.task.extended button.delete-task-btn {
 }
 main div.task.extended .description {
   display: block;
+}
+
+.checkbox {
+  background-color: gray;
+}
+
+.checkbox.active {
+  background-color: green;
 }
 
 div.callendar {

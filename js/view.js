@@ -1,5 +1,6 @@
 import callendarView from "./callendarView.js";
 import dateView from "./dateView.js";
+import taskView from "./taskView.js";
 
 const view = {
     body: document.querySelector('body'),
@@ -12,6 +13,7 @@ const view = {
 
         dateView.renderInitial();
         callendarView.renderInitial();
+        taskView.renderInitial();
     },
 
     checkResize: function() {

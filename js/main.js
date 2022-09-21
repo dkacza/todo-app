@@ -28,6 +28,8 @@ class Task {
 export let currentDate = new Date();
 export const todayDate = new Date();
 
+const mainMap = new Map();
+
 // Responsive layout
 const viewType = (window.innerWidth >= view.WIDTH_BREAKPOINT ? 'desktop' : 'mobile');
 view.loadHTMLFramework(viewType);

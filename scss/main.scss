@@ -74,6 +74,7 @@ main.mobile {
     left: 50%;
     transform: translate(-50%, -50%);
     display: none;
+    background-color:aquamarine;
 }
 .modal.active {
     display: block;
@@ -99,6 +100,12 @@ main {
         }
     }
     
+}
+.checkbox {
+    background-color: gray;
+}
+.checkbox.active {
+    background-color: green;
 }
 div.callendar {
     grid-area: callendar;
