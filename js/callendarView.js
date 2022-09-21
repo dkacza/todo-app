@@ -13,7 +13,8 @@ const callendarView = {
         // Rendering mobile modal 
         if(view.viewType == 'mobile') {
             this.generateCallendarModalTemplate();
-            document.querySelector('body').innerHTML += this.callendarModalTemplate;
+            document.querySelector('body').insertAdjacentHTML('beforeend', this.callendarModalTemplate);
+            this.callendarModalTemplate;
             this.callendarModal = document.querySelector('.callendar-modal');
         }
 

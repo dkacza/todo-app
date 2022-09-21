@@ -1,25 +1,28 @@
 import { currentDate, compareDates, todayDate } from "./main.js";
+import view from './view.js'
 
 const dateView = {
     // Initial date panel rendering and attaching event listeners 
     renderInitial: function() {
 
         // Initial HTML
+        
         this.dateSection = document.querySelector('section.date');
         this.dateSection.innerHTML = '';
+
         this.generateTitles();
         this.generateDateTemplate();
         this.dateSection.innerHTML = this.dateTemplate;
 
         // Day navigation
-        const previousDayButton = this.dateSection.querySelector('button.previous');
-        const nextDayButton = this.dateSection.querySelector('button.next');
-        previousDayButton.addEventListener('click', () => {
+        this.previousDayButton = document.querySelector('button.previous');
+        this.nextDayButton = document.querySelector('button.next');
+        this.previousDayButton.addEventListener('click', () => {
             currentDate.setDate(currentDate.getDate() - 1);
             this.updateDate();
             
         });
-        nextDayButton.addEventListener('click', () => {
+        this.nextDayButton.addEventListener('click', () => {
             currentDate.setDate(currentDate.getDate() + 1);
             this.updateDate();
         });
