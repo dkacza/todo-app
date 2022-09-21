@@ -25,14 +25,9 @@ const view = {
         let result = '';
         if(this.viewType == 'mobile') {
             result += this.mobileFramework;
-
-            // Modals
         }
         else {
             result += this.desktopFramework;
-
-            // Modals
-
         }
         return result;
     },

@@ -5,8 +5,10 @@ import view from "./view.js";
 const callendarView = {
     callendarDate: new Date(),
 
-    // Initial Callendar render and attaching event listeners
+    // Initial Callendar rendering and attaching event listeners
     renderInitial: function() {
+
+        this.generateDayMatrix();
 
         // Rendering mobile modal 
         if(view.viewType == 'mobile') {
@@ -18,7 +20,6 @@ const callendarView = {
         // Initial HTML
         this.callendar = document.querySelector('div.callendar');
         this.callendar.innerHTML = '';
-        this.generateDayMatrix();
         this.generateCallendarTemplate();
         this.callendar.innerHTML = this.fullTemplate;
 
@@ -26,7 +27,6 @@ const callendarView = {
         if(view.viewType == 'mobile') {
             this.callendarButton = document.querySelector('.callendar-btn');
             this.callendarButton.addEventListener('click', () => {
-                console.log('heja');
                 this.callendarModal.classList.add('active');
             })
             this.callendarCancelButton = document.querySelector('.callendar-cancel-btn');
@@ -95,7 +95,6 @@ const callendarView = {
         if(this.nextMonth == 13) this.nextMonth = 1;
 
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        const callendarMonthStr = monthNames[this.callendarMonth];
         const monthDays = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
         this.callendarMonthStr = monthNames[this.callendarMonth - 1];
 
@@ -241,7 +240,6 @@ const callendarView = {
                 <p class="description">Click a date on the callendar or go back</p>
             </div>
             <div class="callendar">`;
-        this.generateDayMatrix();
         this.generateCallendarTemplate();
         this.callendarModalTemplate += this.fullTemplate;
         this.callendarModalTemplate += 
