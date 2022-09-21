@@ -1,5 +1,4 @@
 import view from './view.js';
-import templates from './templates.js';
 
 export const compareDates = function(date1, date2) {
     return (date1.getDate() == date2.getDate() &&
@@ -21,8 +20,6 @@ class Task {
         this.date = date;
         this.reccurence = reccurence;
         this.completion = completion;
-
-        this.htmlTemplate = templates.generateTaskTemplate(this.title, this.description, this.completion)
     };
 }
 

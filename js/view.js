@@ -1,4 +1,3 @@
-import templates from "./templates.js";
 import callendarView from "./callendarView.js";
 import dateView from "./dateView.js";
 
@@ -9,7 +8,7 @@ const view = {
     loadHTMLFramework: function(viewType) {
         this.viewType = viewType;
         this.body.innerHTML = '';
-        this.body.innerHTML = templates.generateHTMLFramework(viewType);
+        this.body.innerHTML = this.generateHTMLFramework(viewType);
 
         dateView.renderInitial();
         callendarView.renderInitial();
@@ -21,5 +20,44 @@ const view = {
         console.log('resize');
         this.loadHTMLFramework(newViewType);
     },
+
+    generateHTMLFramework() {
+        let result = '';
+        if(this.viewType == 'mobile') {
+            result += this.mobileFramework;
+
+            // Modals
+        }
+        else {
+            result += this.desktopFramework;
+
+            // Modals
+
+        }
+        return result;
+    },
+
+    mobileFramework: `
+    <main class="mobile">
+    <div class="container">
+        <section class="date"></section>
+        <section class="tasks"></section>
+        <aside>
+            <button class="callendar-btn">CALLENDAR</button>
+            <button class="add-task-btn">ADD TASK</button>
+        </aside>
+    </div>
+    </main>`,
+
+    desktopFramework: `
+    <main class="desktop">
+    <div class="container">
+        <section class="date"></section>
+        <section class="tasks"></section>
+        <div class="callendar"></div>
+        <aside></aside>
+        <button class="add-task-btn">ADD TASK</button>
+    </div>
+    </main>`,
 };
 export default view;

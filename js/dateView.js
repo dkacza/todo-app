@@ -1,5 +1,4 @@
 import { currentDate, compareDates, todayDate } from "./main.js";
-import callendarView from "./callendarView.js";
 
 const dateView = {
     renderInitial: function() {

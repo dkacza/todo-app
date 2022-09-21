@@ -34,15 +34,7 @@ main.desktop {
             grid-area: tasks;
             background-color: antiquewhite;
         }
-        div.callendar {
-            grid-area: callendar;
-            display: flex;
-            background-color: azure;
-            section.days {
-                display: grid;
-                grid-template-columns: repeat(7, 1fr);
-            }
-        }
+        
         button.add-task-btn {
             position: absolute;
             bottom: 50px;
@@ -107,4 +99,13 @@ main {
         }
     }
     
+}
+div.callendar {
+    grid-area: callendar;
+    display: flex;
+    background-color: azure;
+    section.days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+    }
 }

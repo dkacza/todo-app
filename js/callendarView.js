@@ -1,20 +1,43 @@
-import { compareDates, todayDate } from "./main.js";
+import dateView from "./dateView.js";
+import { todayDate, currentDate } from "./main.js";
+import view from "./view.js";
 
 const callendarView = {
     callendarDate: new Date(),
 
-    // USED WHEN RENDERING A NEW CALLENDAR
-    // ATTACHES EVENT LISTENERS TO CALLENDAR BUTTONS
+    // Initial Callendar render and attaching event listeners
     renderInitial: function() {
+
+        // Rendering mobile modal 
+        if(view.viewType == 'mobile') {
+            this.generateCallendarModalTemplate();
+            document.querySelector('body').innerHTML += this.callendarModalTemplate;
+            this.callendarModal = document.querySelector('.callendar-modal');
+        }
+
+        // Initial HTML
         this.callendar = document.querySelector('div.callendar');
         this.callendar.innerHTML = '';
         this.generateDayMatrix();
         this.generateCallendarTemplate();
         this.callendar.innerHTML = this.fullTemplate;
 
+        // Mobile modal handling
+        if(view.viewType == 'mobile') {
+            this.callendarButton = document.querySelector('.callendar-btn');
+            this.callendarButton.addEventListener('click', () => {
+                console.log('heja');
+                this.callendarModal.classList.add('active');
+            })
+            this.callendarCancelButton = document.querySelector('.callendar-cancel-btn');
+            this.callendarCancelButton.addEventListener('click', () => {
+                this.callendarModal.classList.remove('active');
+            })
+        }
+
+        // Month navigation
         this.previousMonthButton = document.querySelector('.left-arrow-btn');
         this.nextMonthButton = document.querySelector('.right-arrow-btn');
-
         this.previousMonthButton.addEventListener('click',() => {
             const newMonthDate = new Date(this.callendarDate);
             newMonthDate.setMonth(newMonthDate.getMonth() - 1);
@@ -25,8 +48,27 @@ const callendarView = {
             newMonthDate.setMonth(newMonthDate.getMonth() + 1);
             this.updateCallendar(newMonthDate);
         });
+
+        // Selecting date by clicking on a callendar
+        this.daySection = document.querySelector('section.days');
+        this.daySection.addEventListener('click', (e) => {
+            if(e.target.classList.contains('desc')) return;
+            const targetDateStr = e.target.dataset.date;
+            const dateArr = targetDateStr.split('-');
+            currentDate.setDate(dateArr[0]);
+            currentDate.setMonth(dateArr[1] - 1);
+            currentDate.setFullYear(dateArr[2]);
+            dateView.updateDate();
+
+            if(view.viewType == 'mobile') {
+                this.callendarModal.classList.remove('active');
+            }
+        })
+
+        
+
     },
-    // USED FOR CHANGING A MONTH
+    // Updating the structure for a new month
     updateCallendar: function(newDate) {
         this.callendarDate = newDate;
         this.generateDayMatrix();
@@ -41,6 +83,7 @@ const callendarView = {
         daysSection.innerHTML = this.dayTemplate;
         
     },
+    // Generating Matrix with day data for the month
     generateDayMatrix: function() {
         this.callendarYear = this.callendarDate.getYear() + 1900;
         this.callendarMonth = this.callendarDate.getMonth() + 1;
@@ -90,7 +133,6 @@ const callendarView = {
                     firstWeekFlag = false;
                     continue;
                 }
-                console.log(conditionToDelete);
                 firstWeekFlag = false;
             }
             
@@ -98,7 +140,6 @@ const callendarView = {
             this.dayMatrix.push(week);
             firstWeekFlag = false;
         }
-        console.log(this.dayMatrix);
         
         // Fixing the matrix - deleting days like -1, 0 or 32
         // Fix next month
@@ -133,9 +174,8 @@ const callendarView = {
                 }
             }
         }
-        console.log(this.dayMatrix);
     },
-    // GENERATES TEMPLATE FOR DAYS
+    // Generating HTML template for the days section of the callendar
     generateDayTemplate: function() {
         let resultTemplate = 
         `<div class="day desc">mon</div>
@@ -164,7 +204,7 @@ const callendarView = {
         }
         this.dayTemplate = resultTemplate;
     },
-    // GENERATES FULL TEMPLATE
+    // Generating full callendar template
     generateCallendarTemplate: function() {
         this.generateDayTemplate();
         
@@ -192,8 +232,22 @@ const callendarView = {
         this.fullTemplate = resultTemplate;
             
     },
-    // GENERATE MOBILE MODAL
-    generateCallendarModal: function() {
+    // Generating Mobile modal template
+    generateCallendarModalTemplate: function() {
+        this.callendarModalTemplate = `
+        <section class="callendar-modal modal">
+            <div class="text">
+                <h1>Select the Day</h1>
+                <p class="description">Click a date on the callendar or go back</p>
+            </div>
+            <div class="callendar">`;
+        this.generateDayMatrix();
+        this.generateCallendarTemplate();
+        this.callendarModalTemplate += this.fullTemplate;
+        this.callendarModalTemplate += 
+            `</div>
+            <button class="callendar-cancel-btn">Cancel</button>
+        </section>`;
 
     },
 }
