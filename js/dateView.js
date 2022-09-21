@@ -1,5 +1,5 @@
 import { currentDate, compareDates, todayDate } from "./main.js";
-import view from './view.js'
+import taskView from "./taskView.js";
 
 const dateView = {
     // Initial date panel rendering and attaching event listeners 
@@ -35,6 +35,7 @@ const dateView = {
         const dateDescDOM = document.querySelector('.date-full');
         dateTitleDOM.innerHTML = this.title;
         dateDescDOM.innerHTML = this.dateString;
+        taskView.updateTaskSection();
     },
 
     // Generating template for Date sectiin
