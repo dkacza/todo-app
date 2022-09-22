@@ -29,6 +29,7 @@ const taskView = {
         this.confirmTaskButton.addEventListener('click', this.validateAndAddTask.bind(this));
 
         this.updateTaskSection();
+        this.taskSection.addEventListener('click', this.handleTaskSectionClick.bind(this));
     },
     validateAndAddTask() {
         const taskName = this.taskNameInput.value;
@@ -42,9 +43,6 @@ const taskView = {
         const taskDate = new Date(currentDate);
         const taskFromInput = new Task(taskName, taskDesc, taskDate, reccurence, false);
         const key = taskDate.stringDMY();
-
-        console.log(key);
-        console.log(taskFromInput);
 
         let taskArray = mainMap.get(key);
         if(taskArray == undefined) {
@@ -66,15 +64,42 @@ const taskView = {
             const template = this.generateTaskTemplate(task);
             this.taskSection.insertAdjacentHTML('beforeend', template);
         }
+    },
+    handleTaskSectionClick: function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('click')
 
-        this.taskSection.addEventListener('click', (e) => {
-            if(e.path.find(element => {
-                return element.classList?.contains('extend-task-btn');
+            // Extend Button
+        const extendButton = e.target.closest('button.extend-task-btn');
+        console.log(extendButton);
+        if (extendButton) {
+            extendButton.closest('div.task').classList.toggle('extended');
+            console.log(extendButton.closest('div.task'));
+            console.log(extendButton.closest('div.task').classList);
+            
+        }
+            // Checkbox
+        const checkbox = e.target.closest('div.checkbox');
+        if (checkbox) {
+            checkbox.classList.toggle('active');
 
-            })) {
-                console.log('expand');
-            }
-        })
+            const dateKey = currentDate.stringDMY();
+            const id = checkbox.closest('div.task').dataset.id;
+            const task = mainMap.get(dateKey).find(task => {return task.id == id});
+            if (task.completion) task.completion = false;
+            else task.completion = true;
+        }
+            // Deleting task
+        const deleteBtn = e.target.closest('button.delete-task-btn');
+        if (deleteBtn) {
+            const dateKey = currentDate.stringDMY();
+            const idForDeletion = deleteBtn.closest('div.task').dataset.id;
+
+            mainMap.get(dateKey).filter(task => task.id !== idForDeletion);
+            deleteBtn.closest('div.task').remove();
+        }
+        return;
     },
     generateAddTaskModal: function() {
         this.addTaskModalTemplate = `
@@ -103,7 +128,7 @@ const taskView = {
     },
     generateTaskTemplate(task) {
         const template = `
-        <div class="task">
+        <div class="task" data-id="${task.id}">
             <section class="left-check">
                 <div class="checkbox ${task.completion ? 'active' : ''}">
                     <span class="material-symbols-rounded small">

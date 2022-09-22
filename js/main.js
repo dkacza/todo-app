@@ -20,9 +20,13 @@ export class Task {
         this.date = date;
         this.reccurence = reccurence;
         this.completion = completion;
+        this.id = this.nextID;
+        Task.prototype.nextID++;
     };
+    
 }
 
+Task.prototype.nextID = 1;
 // CurrentDay stores the selected day in the app
 // Main map stores the day-tasks pairs
 export let currentDate = new Date();
