@@ -1,38 +1,100 @@
-@import "var.scss";
+@import 'var.scss';
+
+
+// Common
 main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
-    background: linear-gradient(111.16deg, #660708 -6.65%, #E5383B 99.11%, #E5383B 99.11%);
+    background: $gradient1;
+
+}
+div.callendar {
+    grid-area: callendar;
+    display: flex;
+    flex-direction: column;
+
+    section.month-year {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+
+        flex-basis: 70px;
+        background-color: $secondary3;
+    }
+    section.days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+    }
+}
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+.modal.active {
+    display: block;
 }
 
-main.desktop {
-    div.container {
+// Mobile
+main.mobile {
+    .container {
         width: 100%;
         height: 100%;
-        position: relative;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
+
+        background-color: $primary1;
+
+        section.date {
+            flex-basis: 140px;
+        }
+        section.tasks {
+            flex-grow: 1;
+        }
+        aside {
+            flex-basis: 60px;
+            background-color: $secondary2;
+            align-self: stretch;
+        }
+    }
+}
+// Desktop
+main.desktop {
+    .container {
+        @include centerAbsolute;
+        width: calc(100% - 40px);
+        height: calc(100% - 40px);
+        max-width: 1440px;
+        max-height: 830px;
+        
         display: grid;
-        grid-template-columns: 60px 1fr 360px;
+        grid-template-columns: 80px 1fr 360px;
         grid-template-rows: 140px 1fr;
         grid-template-areas: 
         "aside date ."
         "aside tasks callendar";
 
+        background: rgba(245, 243, 244, 0.9);
+        box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.25);
+        border-radius: 15px;
+        overflow: hidden;
+
         aside {
             grid-area: aside;
-            background-color: red;
+            background-color: $secondary2;
         }
         section.date {
             grid-area: date;
-            background-color: beige;
         }
         section.tasks {
             grid-area: tasks;
-            background-color: antiquewhite;
         }
         
         button.add-task-btn {
@@ -40,79 +102,5 @@ main.desktop {
             bottom: 50px;
             right: 50px;
         }
-    }
-}
-
-main.mobile {
-    div.container {
-        background-color: white;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: stretch;
-    }
-    section.date {
-        flex-basis: 140px;
-        background-color: beige;
-    }
-    section.tasks {
-        flex-grow: 1;
-        background-color: antiquewhite;
-    }
-    aside {
-        flex-basis: 60px;
-        background-color: red;
-        align-self: stretch;
-    }
-}
-
-.modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none;
-    background-color:aquamarine;
-}
-.modal.active {
-    display: block;
-}
-.callendar {
-    overflow: hidden;
-}
-main {
-    div.task {
-        button.delete-task-btn {
-            display: none;
-        }
-        .description {
-            display: none;
-        }
-    }
-    div.task.extended {
-        button.delete-task-btn {
-            display: block;
-        }
-        .description {
-            display: block;
-        }
-    }
-    
-}
-.checkbox {
-    background-color: gray;
-}
-.checkbox.active {
-    background-color: green;
-}
-div.callendar {
-    grid-area: callendar;
-    display: flex;
-    background-color: azure;
-    section.days {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
     }
 }

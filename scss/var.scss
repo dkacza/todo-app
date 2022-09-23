@@ -1,3 +1,17 @@
+// Variables
+$primary1: #FFFFFF;
+$primary2: #F5F3F4;
+$primary3: #D3D3D3;
+$primary4: #B1A7A6;
+$secondary1: #E5383B;
+$secondary2: #BA181B;
+$secondary3: #A4161A;
+$secondary4: #660708;
+$accent1: #161A1D;
+$accent2: #0B090A;
+$gradient1: linear-gradient(111.16deg, #660708 -6.65%, #E5383B 99.11%, #E5383B 99.11%);
+
+// Reset and initaial styling
 * {
     margin: 0;
     padding: 0;
@@ -5,4 +19,11 @@
 }
 html {
     font-size: 16px;
+    color: $accent1;
+}
+@mixin centerAbsolute {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
