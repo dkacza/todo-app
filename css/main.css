@@ -30,31 +30,51 @@ html {
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 
 h2 {
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 h3 {
   font-size: 1.5rem;
 }
 
-main {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(111.16deg, #660708 -6.65%, #E5383B 99.11%, #E5383B 99.11%);
+section.callendar-modal h1 {
+  margin-top: 1rem;
+  color: #BA181B;
+  text-align: center;
+}
+section.callendar-modal p.description {
+  text-align: center;
+  margin-top: 0.25rem;
+  font-size: 1.25rem;
+}
+section.callendar-modal div.callendar {
+  margin: 0 auto;
+  margin-top: 1.5rem;
+}
+section.callendar-modal button.callendar-cancel-btn {
+  display: block;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  background-color: #B1A7A6;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #FFFFFF;
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0px 0px 2.5px 1px rgba(0, 0, 0, 0.25);
 }
 
 div.callendar {
   grid-area: callendar;
   display: flex;
   align-self: flex-start;
+  justify-self: center;
   flex-direction: column;
-  max-width: 320px;
-  margin: 10px;
+  width: 320px;
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
@@ -82,6 +102,7 @@ div.callendar section.days div.day {
   align-items: center;
   justify-content: center;
   text-align: center;
+  font-weight: 500;
   font-size: 1.5rem;
   height: 50px;
 }
@@ -99,6 +120,7 @@ div.callendar section.days div.day.today {
   z-index: 1;
   color: #F5F3F4;
   position: relative;
+  transform-style: preserve-3d;
 }
 div.callendar section.days div.day.today::after {
   position: absolute;
@@ -107,11 +129,19 @@ div.callendar section.days div.day.today::after {
   transform: translate(-50%, -50%);
   content: "";
   display: block;
-  width: 45px;
-  height: 45px;
+  width: 42px;
+  height: 42px;
   background-color: #BA181B;
   border-radius: 50%;
   transform: translateZ(-1px) translate(-50%, -50%);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+}
+
+main {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(111.16deg, #660708 -6.65%, #E5383B 99.11%, #E5383B 99.11%);
 }
 
 button {
@@ -120,15 +150,17 @@ button {
 }
 
 .modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: none;
 }
 
 .modal.active {
   display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 60px);
+  background-color: #FFFFFF;
 }
 
 main.mobile .container {
