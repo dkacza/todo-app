@@ -74,8 +74,8 @@ const callendarView = {
         this.generateDayMatrix();
         this.generateCallendarTemplate();
         
-        const monthText = document.querySelector('p.month');
-        const yearText = document.querySelector('p.year');
+        const monthText = document.querySelector('.month');
+        const yearText = document.querySelector('.year');
         monthText.innerHTML = this.callendarMonthStr;
         yearText.innerHTML = this.callendarYear;
 
@@ -215,8 +215,8 @@ const callendarView = {
                     </span>
             </button>
             <div class="text">
-                <p class="month">${this.callendarMonthStr}</p>
-                <p class="year">${this.callendarYear}</p>
+                <h3 class="month">${this.callendarMonthStr}</p>
+                <h3 class="year">${this.callendarYear}</p>
             </div>
             <button class="right-arrow-btn arrow">
                 <span class="material-symbols-rounded large">
