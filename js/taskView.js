@@ -64,6 +64,7 @@ const taskView = {
             const template = this.generateTaskTemplate(task);
             this.taskSection.insertAdjacentHTML('beforeend', template);
         }
+        console.log(mainMap);
     },
     handleTaskSectionClick: function(e) {
         e.preventDefault();
@@ -94,9 +95,13 @@ const taskView = {
         const deleteBtn = e.target.closest('button.delete-task-btn');
         if (deleteBtn) {
             const dateKey = currentDate.stringDMY();
-            const idForDeletion = deleteBtn.closest('div.task').dataset.id;
+            const idForDeletion = Number(deleteBtn.closest('div.task').dataset.id);
 
-            mainMap.get(dateKey).filter(task => task.id !== idForDeletion);
+            const taskArray = mainMap.get(dateKey);
+            const newArray = taskArray.filter((task) => {
+                return !(task.id == idForDeletion);
+            })
+            mainMap.set(dateKey, newArray); 
             deleteBtn.closest('div.task').remove();
         }
         return;
