@@ -1,4 +1,4 @@
-import { currentDate, compareDates, todayDate } from "./main.js";
+import { currentDate, todayDate } from "./main.js";
 import taskView from "./taskView.js";
 
 const dateView = {
@@ -6,13 +6,17 @@ const dateView = {
     renderInitial: function() {
 
         // Initial HTML
-        
         this.dateSection = document.querySelector('section.date');
         this.dateSection.innerHTML = '';
 
         this.generateTitles();
         this.generateDateTemplate();
         this.dateSection.innerHTML = this.dateTemplate;
+
+        // If past add past class
+        if(currentDate-todayDate < 0) this.dateSection.classList.add('past');
+        else this.dateSection.classList.remove('past');
+        
 
         // Day navigation
         this.previousDayButton = document.querySelector('button.previous');
@@ -33,6 +37,8 @@ const dateView = {
         this.generateTitles();
         const dateTitleDOM = document.querySelector('.date-title');
         const dateDescDOM = document.querySelector('.date-full');
+        if(currentDate-todayDate < 0) this.dateSection.classList.add('past');
+        else this.dateSection.classList.remove('past');
         dateTitleDOM.innerHTML = this.title;
         dateDescDOM.innerHTML = this.dateString;
         taskView.updateTaskSection();
@@ -96,9 +102,9 @@ const dateView = {
         tommorow.setDate(tommorow.getDate() + 1);
 
         this.title = '';
-        if(compareDates(currentDate, todayDate)) this.title = 'Today';
-        else if (compareDates(todayDate, yesterday)) this.title = 'Tommorow';
-        else if (compareDates(todayDate, tommorow)) this.title = 'Yesterday';
+        if(currentDate.compareDates(currentDate, todayDate)) this.title = 'Today';
+        else if (currentDate.compareDates(todayDate, yesterday)) this.title = 'Tommorow';
+        else if (currentDate.compareDates(todayDate, tommorow)) this.title = 'Yesterday';
         else this.title = weekdayNames[weekday];
 
         this.dateString = `${this.title == weekdayStr ? '' : `${weekdayStr},`} ${dayStr} of ${monthStr}`;

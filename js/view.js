@@ -9,7 +9,8 @@ const view = {
     loadHTMLFramework: function(viewType) {
         this.viewType = viewType;
         this.body.innerHTML = '';
-        this.body.innerHTML = this.generateHTMLFramework(viewType);
+        // this.body.innerHTML = this.generateHTMLFramework(viewType);
+        this.body.insertAdjacentHTML('beforeend', this.generateHTMLFramework(viewType));
 
         dateView.renderInitial();
         callendarView.renderInitial();
@@ -19,18 +20,13 @@ const view = {
     checkResize: function() {
         const newViewType = (window.innerWidth >= this.WIDTH_BREAKPOINT ? 'desktop' : 'mobile');
         if (newViewType == this.viewType) return;
-        console.log('resize');
         this.loadHTMLFramework(newViewType);
     },
 
     generateHTMLFramework() {
         let result = '';
-        if(this.viewType == 'mobile') {
-            result += this.mobileFramework;
-        }
-        else {
-            result += this.desktopFramework;
-        }
+        if(this.viewType == 'mobile') result += this.mobileFramework;
+        else result += this.desktopFramework;
         return result;
     },
 

@@ -1,3 +1,4 @@
+import callendarView from "./callendarView.js";
 import { currentDate, Task, mainMap } from "./main.js";
 
 const taskView = {
@@ -14,18 +15,14 @@ const taskView = {
         this.confirmTaskButton = document.querySelector('.confirm-task-btn');
         this.taskNameInput = document.querySelector('input.task-name');
         this.taskDescInput = document.querySelector('textarea.task-desc');
-        this.taskCheckbox = document.querySelector('div.checkbox-recurring');
 
         this.addTaskButton.addEventListener('click', () => {
             this.addTaskModal.classList.add('active');
+            callendarView?.callendarModal.classList.remove('active');
         });
         this.cancelTaskButton.addEventListener('click', () => {
             this.addTaskModal.classList.remove('active');
         });
-        this.taskCheckbox.addEventListener('click', () => {
-            this.taskCheckbox.classList.toggle('active');
-        });
-
         this.confirmTaskButton.addEventListener('click', this.validateAndAddTask.bind(this));
 
         this.updateTaskSection();
@@ -34,23 +31,18 @@ const taskView = {
     validateAndAddTask() {
         const taskName = this.taskNameInput.value;
         const taskDesc = this.taskDescInput.value;
-        const reccurence = this.taskCheckbox.classList.contains('active');
         // Check if the values are correct
         if(!taskName || !taskDesc) {
             alert('Please fill the form correctly.');
             return;
         }
         const taskDate = new Date(currentDate);
-        const taskFromInput = new Task(taskName, taskDesc, taskDate, reccurence, false);
+        const taskFromInput = new Task(taskName, taskDesc, taskDate, false);
         const key = taskDate.stringDMY();
 
         let taskArray = mainMap.get(key);
-        if(taskArray == undefined) {
-            mainMap.set(key, [taskFromInput]);
-        }
-        else {
-            mainMap.get(key).push(taskFromInput);
-        }
+        if(!taskArray) mainMap.set(key, [taskFromInput]);
+        else mainMap.get(key).push(taskFromInput);
         this.addTaskModal.classList.remove('active');
         this.updateTaskSection();
     },
@@ -64,21 +56,15 @@ const taskView = {
             const template = this.generateTaskTemplate(task);
             this.taskSection.insertAdjacentHTML('beforeend', template);
         }
-        console.log(mainMap);
     },
     handleTaskSectionClick: function(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log('click')
 
-            // Extend Button
+        // Extend Button
         const extendButton = e.target.closest('button.extend-task-btn');
-        console.log(extendButton);
         if (extendButton) {
-            extendButton.closest('div.task').classList.toggle('extended');
-            console.log(extendButton.closest('div.task'));
-            console.log(extendButton.closest('div.task').classList);
-            
+            extendButton.closest('div.task').classList.toggle('extended');            
         }
             // Checkbox
         const checkbox = e.target.closest('div.checkbox');
@@ -113,17 +99,10 @@ const taskView = {
             <section class="inputs">
                 <input name="task-name" type="text" class="task-name" placeholder="task name">
                 <textarea name="task-desc" class="task-desc" placeholder="description"></textarea>
-                <div class="checkbox-container">
-                    <p>Reccuring task</p>
-                    <div class="checkbox-recurring checkbox">
-                        <span class="material-symbols-rounded medium-large">
-                            done
-                            </span>
-                    </div>
-                </div>
             </section>
             <div class="text">
-                <p>tPLACEHOLDER FOR MESSAGE</p>
+                <p>task will be added to: </p>
+                <p class="date">${currentDate.stringDMY().replaceAll('-','.')}</p>
             </div>
             <section class="buttons">
                 <button class="cancel-task-btn">Cancel</button>

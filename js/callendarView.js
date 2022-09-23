@@ -1,6 +1,7 @@
 import dateView from "./dateView.js";
-import { todayDate, currentDate } from "./main.js";
+import taskView from "./taskView.js";
 import view from "./view.js";
+import {todayDate, currentDate} from "./main.js";
 
 const callendarView = {
     callendarDate: new Date(),
@@ -14,7 +15,6 @@ const callendarView = {
         if(view.viewType == 'mobile') {
             this.generateCallendarModalTemplate();
             document.querySelector('body').insertAdjacentHTML('beforeend', this.callendarModalTemplate);
-            this.callendarModalTemplate;
             this.callendarModal = document.querySelector('.callendar-modal');
         }
 
@@ -29,6 +29,7 @@ const callendarView = {
             this.callendarButton = document.querySelector('.callendar-btn');
             this.callendarButton.addEventListener('click', () => {
                 this.callendarModal.classList.add('active');
+                taskView.addTaskModal.classList.remove('active');
             })
             this.callendarCancelButton = document.querySelector('.callendar-cancel-btn');
             this.callendarCancelButton.addEventListener('click', () => {
@@ -56,19 +57,17 @@ const callendarView = {
             if(e.target.classList.contains('desc')) return;
             const targetDateStr = e.target.dataset.date;
             const dateArr = targetDateStr.split('-');
-            currentDate.setDate(dateArr[0]);
-            currentDate.setMonth(dateArr[1] - 1);
             currentDate.setFullYear(dateArr[2]);
+            currentDate.setMonth(dateArr[1] - 1);
+            currentDate.setDate(dateArr[0]);
             dateView.updateDate();
 
             if(view.viewType == 'mobile') {
                 this.callendarModal.classList.remove('active');
             }
         })
-
-        
-
     },
+    
     // Updating the structure for a new month
     updateCallendar: function(newDate) {
         this.callendarDate = newDate;
