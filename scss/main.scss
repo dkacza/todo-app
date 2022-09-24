@@ -1,5 +1,6 @@
 @import 'var.scss';
 @import 'callendar.scss';
+@import 'main.scss';
 
 // Common
 main {
@@ -7,7 +8,6 @@ main {
     width: 100vw;
     height: 100vh;
     background: $gradient1;
-
 }
 button {
     border: none;
@@ -41,7 +41,7 @@ main.mobile {
         background-color: $primary1;
 
         section.date {
-            flex-basis: 140px;
+            flex-basis: 160px;
         }
         section.tasks {
             flex-grow: 1;
@@ -65,7 +65,7 @@ main.desktop {
         
         display: grid;
         grid-template-columns: 80px 1fr 400px;
-        grid-template-rows: 140px 1fr;
+        grid-template-rows: 160px 1fr;
         grid-template-areas: 
         "aside date ."
         "aside tasks callendar";

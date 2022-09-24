@@ -41,6 +41,11 @@ h3 {
   font-size: 1.5rem;
 }
 
+@media (max-width: 360px) {
+  html {
+    font-size: 15px;
+  }
+}
 section.callendar-modal h1 {
   margin-top: 1rem;
   color: #BA181B;
@@ -143,6 +148,38 @@ main {
   height: 100vh;
   background: linear-gradient(111.16deg, #660708 -6.65%, #E5383B 99.11%, #E5383B 99.11%);
 }
+main section.date {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+main section.date h1 {
+  color: #161A1D;
+}
+main section.date p {
+  font-size: 1.4rem;
+}
+main section.date section.date-nav {
+  display: flex;
+  flex-direction: row;
+}
+main section.date section.date-nav button {
+  background-color: #F5F3F4;
+  border-radius: 8px;
+  color: #BA181B;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25rem 1rem;
+  font-size: 1.25rem;
+  margin-right: 1rem;
+  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+}
+main section.date section.date-nav button span {
+  color: #BA181B;
+}
 
 button {
   border: none;
@@ -173,7 +210,7 @@ main.mobile .container {
   background-color: #FFFFFF;
 }
 main.mobile .container section.date {
-  flex-basis: 140px;
+  flex-basis: 160px;
 }
 main.mobile .container section.tasks {
   flex-grow: 1;
@@ -195,7 +232,7 @@ main.desktop .container {
   max-height: 830px;
   display: grid;
   grid-template-columns: 80px 1fr 400px;
-  grid-template-rows: 140px 1fr;
+  grid-template-rows: 160px 1fr;
   grid-template-areas: "aside date ." "aside tasks callendar";
   background: rgba(245, 243, 244, 0.9);
   box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.25);

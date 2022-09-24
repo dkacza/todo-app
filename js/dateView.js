@@ -47,18 +47,18 @@ const dateView = {
     // Generating template for Date sectiin
     generateDateTemplate: function() {
         this.dateTemplate =  `
-        <div class="date-title">${this.title}</div>
-        <div class="date-full">${this.dateString}</div>
+        <h1 class="date-title">${this.title}</h1>
+        <p class="date-full">${this.dateString}</p>
         
         <section class="date-nav">
             <button class="previous">
                 <span class="material-symbols-rounded medium">
                     navigate_before
                 </span>
-                previous
+                Previous
             </button>
             <button class="next">
-                next
+                Next
                 <span class="material-symbols-rounded medium">
                     navigate_next
                 </span> 
