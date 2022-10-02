@@ -1,0 +1,166 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+.material-symbols-rounded {
+  font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 0, "opsz" 48;
+  font-size: 1.5rem;
+  color: #F5F3F4;
+}
+
+.material-symbols-rounded.small {
+  font-size: 1rem;
+}
+
+.material-symbols-rounded.medium-large {
+  font-size: 2rem;
+}
+
+.material-symbols-rounded.large {
+  font-size: 2.5rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  color: #161A1D;
+  font-family: "Inter", sans-serif;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 360px) {
+  html {
+    font-size: 15px;
+  }
+}
+section.tasks {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  padding: 1rem;
+}
+section.tasks div.task {
+  display: flex;
+  flex-direction: row;
+  background-color: #F5F3F4;
+  border-radius: 0.75rem;
+  margin-bottom: 0.5rem;
+  max-width: 720px;
+  box-shadow: 0px 0px 8.08989px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+section.tasks div.task .left-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #BA181B;
+  flex-shrink: 0;
+}
+section.tasks div.task .left-check div.checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 0.25rem;
+  background-color: #FFFFFF;
+}
+section.tasks div.task .left-check div.checkbox span {
+  display: none;
+  color: #BA181B;
+}
+section.tasks div.task .text {
+  flex-grow: 1;
+}
+section.tasks div.task .text p.title {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  align-self: center;
+  font-weight: bold;
+  color: #A4161A;
+  margin-left: 1rem;
+}
+section.tasks div.task .text p.description {
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  display: none;
+}
+section.tasks div.task .buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 1rem;
+}
+section.tasks div.task .buttons .extend-task-btn span {
+  color: #BA181B;
+}
+section.tasks div.task .buttons .delete-task-btn {
+  display: none;
+}
+section.tasks div.task.extended {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+section.tasks div.task.extended .text p.title {
+  height: 30%;
+}
+section.tasks div.task.extended .text p.description {
+  display: block;
+}
+section.tasks div.task.extended .buttons .delete-task-btn {
+  display: block;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 1rem;
+  background-color: #BA181B;
+}
+
+main.mobile section.tasks {
+  flex-grow: 1;
+}
+main.mobile section.tasks div.task {
+  min-height: 40px;
+}
+main.mobile section.tasks div.task .left-check {
+  width: 40px;
+}
+main.mobile section.tasks div.task .text .title {
+  height: 40px;
+  font-size: 1.5rem;
+}
+main.mobile section.tasks div.task .buttons .extend-task-btn {
+  height: 40px;
+}
+
+main.desktop section.tasks div.task {
+  min-height: 80px;
+}
+main.desktop section.tasks div.task .left-check {
+  width: 80px;
+}
+main.desktop section.tasks div.task .left-check .checkbox {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+main.desktop section.tasks div.task .text .title {
+  height: 80px;
+}
+main.desktop section.tasks div.task .buttons .extend-task-btn {
+  height: 80px;
+}
