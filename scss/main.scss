@@ -1,6 +1,6 @@
 @import 'var.scss';
 @import 'callendar.scss';
-@import 'main.scss';
+@import 'date.scss';
 
 // Common
 main {
@@ -26,6 +26,103 @@ button {
     background-color: $primary1;
     
 }
+section.tasks {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    padding: 1rem;
+
+    div.task {
+        display: flex;
+        flex-direction: row; 
+        background-color: $primary2;
+        border-radius: 0.75rem;
+        margin-bottom: 0.5rem;
+        max-width: 720px;
+        box-shadow: 0px 0px 8.08989px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+
+
+        .left-check {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $secondary2;
+            flex-shrink: 0;
+
+            div.checkbox {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 1rem;
+                width: 1rem;
+                border-radius: 0.25rem;
+                background-color: $primary1;
+                
+
+                span {
+                    display: none;
+                    color: $secondary2;
+                }
+            }
+        }
+        .text {
+            flex-grow: 1;
+            p.title {
+                display: flex;
+                align-items: center;
+                font-size: 2rem;
+                align-self: center;
+                font-weight: bold;
+                color: $secondary3;
+                margin-left: 1rem;
+            }
+            p.description {
+                margin-left: 1rem;
+                margin-bottom: 1rem;
+                display: none;
+            }
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-right: 1rem;
+
+            .extend-task-btn {
+                span {
+                    color: $secondary2;
+                }
+            }
+            .delete-task-btn {
+                display: none;
+            }
+        }
+    }
+    div.task.extended {
+        height: fit-content;
+        .text {
+            p.title {
+                height: 30%;
+            }
+            p.description {
+                display: block;
+                
+            }
+        }
+        .buttons {
+            
+            .delete-task-btn {
+                display: block;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                margin-bottom: 1rem;
+                background-color: $secondary2;
+            }
+        }
+    }
+}
 
 // Mobile
 main.mobile {
@@ -45,6 +142,25 @@ main.mobile {
         }
         section.tasks {
             flex-grow: 1;
+
+            div.task {
+                min-height: 40px;
+
+                .left-check {
+                    width: 40px;
+                }
+                .text {
+                    .title {
+                        height: 40px;
+                        font-size: 1.5rem;
+                    }
+                }
+                .buttons {
+                    .extend-task-btn {
+                        height: 40px;
+                    }
+                }
+            }
         }
         aside {
             flex-basis: 60px;
@@ -84,6 +200,28 @@ main.desktop {
         }
         section.tasks {
             grid-area: tasks;
+            div.task {
+                min-height: 80px;
+
+                .left-check {
+                    width: 80px;
+                    .checkbox {
+                        height: 1.5rem;
+                        width: 1.5rem;
+                    }
+                }
+                .text {
+                    .title {
+                        height: 80px;
+                    }
+                }
+                .buttons {
+                    .extend-task-btn {
+                        height: 80px;
+                    }
+                    
+                }
+            }
         }
         
         button.add-task-btn {

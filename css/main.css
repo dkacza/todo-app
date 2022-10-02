@@ -6,7 +6,7 @@
 }
 
 .material-symbols-rounded.small {
-  font-size: 0.75rem;
+  font-size: 1rem;
 }
 
 .material-symbols-rounded.medium-large {
@@ -142,29 +142,23 @@ div.callendar section.days div.day.today::after {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
 }
 
-main {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(111.16deg, #660708 -6.65%, #E5383B 99.11%, #E5383B 99.11%);
-}
-main section.date {
+section.date {
   padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-main section.date h1 {
+section.date h1 {
   color: #161A1D;
 }
-main section.date p {
+section.date p {
   font-size: 1.4rem;
 }
-main section.date section.date-nav {
+section.date section.date-nav {
   display: flex;
   flex-direction: row;
 }
-main section.date section.date-nav button {
+section.date section.date-nav button {
   background-color: #F5F3F4;
   border-radius: 8px;
   color: #BA181B;
@@ -177,8 +171,15 @@ main section.date section.date-nav button {
   margin-right: 1rem;
   box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
 }
-main section.date section.date-nav button span {
+section.date section.date-nav button span {
   color: #BA181B;
+}
+
+main {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(111.16deg, #660708 -6.65%, #E5383B 99.11%, #E5383B 99.11%);
 }
 
 button {
@@ -200,6 +201,91 @@ button {
   background-color: #FFFFFF;
 }
 
+section.tasks {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  padding: 1rem;
+}
+section.tasks div.task {
+  display: flex;
+  flex-direction: row;
+  background-color: #F5F3F4;
+  border-radius: 0.75rem;
+  margin-bottom: 0.5rem;
+  max-width: 720px;
+  box-shadow: 0px 0px 8.08989px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+section.tasks div.task .left-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #BA181B;
+  flex-shrink: 0;
+}
+section.tasks div.task .left-check div.checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 0.25rem;
+  background-color: #FFFFFF;
+}
+section.tasks div.task .left-check div.checkbox span {
+  display: none;
+  color: #BA181B;
+}
+section.tasks div.task .text {
+  flex-grow: 1;
+}
+section.tasks div.task .text p.title {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  align-self: center;
+  font-weight: bold;
+  color: #A4161A;
+  margin-left: 1rem;
+}
+section.tasks div.task .text p.description {
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  display: none;
+}
+section.tasks div.task .buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 1rem;
+}
+section.tasks div.task .buttons .extend-task-btn span {
+  color: #BA181B;
+}
+section.tasks div.task .buttons .delete-task-btn {
+  display: none;
+}
+section.tasks div.task.extended {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+section.tasks div.task.extended .text p.title {
+  height: 30%;
+}
+section.tasks div.task.extended .text p.description {
+  display: block;
+}
+section.tasks div.task.extended .buttons .delete-task-btn {
+  display: block;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 1rem;
+  background-color: #BA181B;
+}
+
 main.mobile .container {
   width: 100%;
   height: 100%;
@@ -214,6 +300,19 @@ main.mobile .container section.date {
 }
 main.mobile .container section.tasks {
   flex-grow: 1;
+}
+main.mobile .container section.tasks div.task {
+  min-height: 40px;
+}
+main.mobile .container section.tasks div.task .left-check {
+  width: 40px;
+}
+main.mobile .container section.tasks div.task .text .title {
+  height: 40px;
+  font-size: 1.5rem;
+}
+main.mobile .container section.tasks div.task .buttons .extend-task-btn {
+  height: 40px;
 }
 main.mobile .container aside {
   flex-basis: 60px;
@@ -248,6 +347,22 @@ main.desktop .container section.date {
 }
 main.desktop .container section.tasks {
   grid-area: tasks;
+}
+main.desktop .container section.tasks div.task {
+  min-height: 80px;
+}
+main.desktop .container section.tasks div.task .left-check {
+  width: 80px;
+}
+main.desktop .container section.tasks div.task .left-check .checkbox {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+main.desktop .container section.tasks div.task .text .title {
+  height: 80px;
+}
+main.desktop .container section.tasks div.task .buttons .extend-task-btn {
+  height: 80px;
 }
 main.desktop .container button.add-task-btn {
   position: absolute;
