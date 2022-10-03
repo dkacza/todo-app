@@ -18,7 +18,7 @@ const taskView = {
 
         this.addTaskButton.addEventListener('click', () => {
             this.addTaskModal.classList.add('active');
-            callendarView?.callendarModal.classList.remove('active');
+            callendarView?.callendarModal?.classList?.remove('active');
         });
         this.cancelTaskButton.addEventListener('click', () => {
             this.addTaskModal.classList.remove('active');
@@ -70,6 +70,7 @@ const taskView = {
         const checkbox = e.target.closest('div.checkbox');
         if (checkbox) {
             checkbox.classList.toggle('active');
+            e.target.closest('div.task').classList.toggle('done');
 
             const dateKey = currentDate.stringDMY();
             const id = checkbox.closest('div.task').dataset.id;
@@ -112,7 +113,7 @@ const taskView = {
     },
     generateTaskTemplate(task) {
         const template = `
-        <div class="task" data-id="${task.id}">
+        <div class="task ${task.completion ? 'done' : ''}" data-id="${task.id}">
             <section class="left-check">
                 <div class="checkbox ${task.completion ? 'active' : ''}">
                     <span class="material-symbols-rounded small">

@@ -41,6 +41,11 @@ section.tasks {
                     color: $secondary2;
                 }
             }
+            div.checkbox.active {
+                span {
+                    display: block;
+                }
+            }
         }
         .text {
             flex-grow: 1;
@@ -95,6 +100,12 @@ section.tasks {
             }
         }
     }
+    div.task.done {
+        background-color: $primary4;
+        p.title {
+            text-decoration: line-through;
+        }
+    }
 }
 section.tasks::-webkit-scrollbar {
     display: none;
@@ -136,6 +147,9 @@ main.desktop {
                 .checkbox {
                     height: 1.5rem;
                     width: 1.5rem;
+                    span {
+                        font-size: 1.5rem;
+                    }
                 }
             }
             .text {

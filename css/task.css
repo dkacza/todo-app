@@ -85,6 +85,9 @@ section.tasks div.task .left-check div.checkbox span {
   display: none;
   color: #BA181B;
 }
+section.tasks div.task .left-check div.checkbox.active span {
+  display: block;
+}
 section.tasks div.task .text {
   flex-grow: 1;
 }
@@ -129,6 +132,12 @@ section.tasks div.task.extended .buttons .delete-task-btn {
   margin-bottom: 1rem;
   background-color: #BA181B;
 }
+section.tasks div.task.done {
+  background-color: #B1A7A6;
+}
+section.tasks div.task.done p.title {
+  text-decoration: line-through;
+}
 
 section.tasks::-webkit-scrollbar {
   display: none;
@@ -164,6 +173,9 @@ main.desktop section.tasks div.task .left-check {
 main.desktop section.tasks div.task .left-check .checkbox {
   height: 1.5rem;
   width: 1.5rem;
+}
+main.desktop section.tasks div.task .left-check .checkbox span {
+  font-size: 1.5rem;
 }
 main.desktop section.tasks div.task .text .title {
   min-height: 80px;
