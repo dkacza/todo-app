@@ -47,9 +47,9 @@ h3 {
   }
 }
 section.tasks {
-  display: flex;
-  flex-direction: column;
   overflow: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
   padding: 1rem;
 }
 section.tasks div.task {
@@ -60,6 +60,9 @@ section.tasks div.task {
   margin-bottom: 0.5rem;
   max-width: 720px;
   box-shadow: 0px 0px 8.08989px rgba(0, 0, 0, 0.25);
+  min-height: -webkit-max-content;
+  min-height: -moz-max-content;
+  min-height: max-content;
   overflow: hidden;
 }
 section.tasks div.task .left-check {
@@ -88,15 +91,14 @@ section.tasks div.task .text {
 section.tasks div.task .text p.title {
   display: flex;
   align-items: center;
-  font-size: 2rem;
   align-self: center;
+  font-size: 2rem;
   font-weight: bold;
   color: #A4161A;
   margin-left: 1rem;
 }
 section.tasks div.task .text p.description {
-  margin-left: 1rem;
-  margin-bottom: 1rem;
+  margin: 1.5rem 0 1.5rem 1rem;
   display: none;
 }
 section.tasks div.task .buttons {
@@ -116,9 +118,6 @@ section.tasks div.task.extended {
   height: -moz-fit-content;
   height: fit-content;
 }
-section.tasks div.task.extended .text p.title {
-  height: 30%;
-}
 section.tasks div.task.extended .text p.description {
   display: block;
 }
@@ -131,8 +130,13 @@ section.tasks div.task.extended .buttons .delete-task-btn {
   background-color: #BA181B;
 }
 
+section.tasks::-webkit-scrollbar {
+  display: none;
+}
+
 main.mobile section.tasks {
   flex-grow: 1;
+  overflow: scroll;
 }
 main.mobile section.tasks div.task {
   min-height: 40px;
@@ -141,13 +145,16 @@ main.mobile section.tasks div.task .left-check {
   width: 40px;
 }
 main.mobile section.tasks div.task .text .title {
-  height: 40px;
+  min-height: 40px;
   font-size: 1.5rem;
 }
 main.mobile section.tasks div.task .buttons .extend-task-btn {
   height: 40px;
 }
 
+main.desktop section.tasks {
+  margin-bottom: 2rem;
+}
 main.desktop section.tasks div.task {
   min-height: 80px;
 }
@@ -159,7 +166,7 @@ main.desktop section.tasks div.task .left-check .checkbox {
   width: 1.5rem;
 }
 main.desktop section.tasks div.task .text .title {
-  height: 80px;
+  min-height: 80px;
 }
 main.desktop section.tasks div.task .buttons .extend-task-btn {
   height: 80px;

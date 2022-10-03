@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 .material-symbols-rounded {
   font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 0, "opsz" 48;
   font-size: 1.5rem;
@@ -175,36 +176,57 @@ section.date section.date-nav button span {
   color: #BA181B;
 }
 
-main {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(111.16deg, #660708 -6.65%, #E5383B 99.11%, #E5383B 99.11%);
+.material-symbols-rounded {
+  font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 0, "opsz" 48;
+  font-size: 1.5rem;
+  color: #F5F3F4;
 }
 
-button {
-  border: none;
-  background-color: rgba(0, 0, 0, 0);
+.material-symbols-rounded.small {
+  font-size: 1rem;
 }
 
-.modal {
-  display: none;
+.material-symbols-rounded.medium-large {
+  font-size: 2rem;
 }
 
-.modal.active {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: calc(100vh - 60px);
-  background-color: #FFFFFF;
+.material-symbols-rounded.large {
+  font-size: 2.5rem;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  color: #161A1D;
+  font-family: "Inter", sans-serif;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 360px) {
+  html {
+    font-size: 15px;
+  }
+}
 section.tasks {
-  display: flex;
-  flex-direction: column;
   overflow: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
   padding: 1rem;
 }
 section.tasks div.task {
@@ -215,6 +237,9 @@ section.tasks div.task {
   margin-bottom: 0.5rem;
   max-width: 720px;
   box-shadow: 0px 0px 8.08989px rgba(0, 0, 0, 0.25);
+  min-height: -webkit-max-content;
+  min-height: -moz-max-content;
+  min-height: max-content;
   overflow: hidden;
 }
 section.tasks div.task .left-check {
@@ -243,15 +268,14 @@ section.tasks div.task .text {
 section.tasks div.task .text p.title {
   display: flex;
   align-items: center;
-  font-size: 2rem;
   align-self: center;
+  font-size: 2rem;
   font-weight: bold;
   color: #A4161A;
   margin-left: 1rem;
 }
 section.tasks div.task .text p.description {
-  margin-left: 1rem;
-  margin-bottom: 1rem;
+  margin: 1.5rem 0 1.5rem 1rem;
   display: none;
 }
 section.tasks div.task .buttons {
@@ -271,9 +295,6 @@ section.tasks div.task.extended {
   height: -moz-fit-content;
   height: fit-content;
 }
-section.tasks div.task.extended .text p.title {
-  height: 30%;
-}
 section.tasks div.task.extended .text p.description {
   display: block;
 }
@@ -283,6 +304,157 @@ section.tasks div.task.extended .buttons .delete-task-btn {
   width: 40px;
   height: 40px;
   margin-bottom: 1rem;
+  background-color: #BA181B;
+}
+
+section.tasks::-webkit-scrollbar {
+  display: none;
+}
+
+main.mobile section.tasks {
+  flex-grow: 1;
+  overflow: scroll;
+}
+main.mobile section.tasks div.task {
+  min-height: 40px;
+}
+main.mobile section.tasks div.task .left-check {
+  width: 40px;
+}
+main.mobile section.tasks div.task .text .title {
+  min-height: 40px;
+  font-size: 1.5rem;
+}
+main.mobile section.tasks div.task .buttons .extend-task-btn {
+  height: 40px;
+}
+
+main.desktop section.tasks {
+  margin-bottom: 2rem;
+}
+main.desktop section.tasks div.task {
+  min-height: 80px;
+}
+main.desktop section.tasks div.task .left-check {
+  width: 80px;
+}
+main.desktop section.tasks div.task .left-check .checkbox {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+main.desktop section.tasks div.task .text .title {
+  min-height: 80px;
+}
+main.desktop section.tasks div.task .buttons .extend-task-btn {
+  height: 80px;
+}
+
+main {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(111.16deg, #660708 -6.65%, #E5383B 99.11%, #E5383B 99.11%);
+}
+
+button {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.modal {
+  display: none;
+}
+
+.modal.active {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 60px);
+  background-color: #FFFFFF;
+}
+
+main.desktop + .modal.active {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60vw;
+  height: 65vh;
+  min-height: 500px;
+  max-width: 640px;
+  box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.4);
+  border-radius: 1rem;
+  padding-top: 1rem;
+}
+
+section.add-task-modal {
+  padding: 0 1rem;
+}
+section.add-task-modal h1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: #BA181B;
+  text-align: center;
+}
+section.add-task-modal section.inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 50%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1rem;
+}
+section.add-task-modal section.inputs input.task-name {
+  border: none;
+  height: 3rem;
+  margin-bottom: 1rem;
+  box-shadow: 0px 0px 2.5022px 0.625551px rgba(0, 0, 0, 0.25);
+  border-radius: 0.5rem;
+  font-family: "Inter", sans-serif;
+  font-size: 1.4rem;
+  padding-left: 1rem;
+}
+section.add-task-modal section.inputs textarea.task-desc {
+  flex-grow: 1;
+  border: none;
+  box-shadow: 0px 0px 2.5022px 0.625551px rgba(0, 0, 0, 0.25);
+  border-radius: 0.5rem;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  padding: 1rem;
+}
+section.add-task-modal section.inputs textarea:focus, section.add-task-modal section.inputs input:focus {
+  outline-color: #BA181B;
+}
+section.add-task-modal div.text {
+  text-align: center;
+}
+section.add-task-modal div.text p {
+  font-size: 1.5rem;
+}
+section.add-task-modal div.text p.date {
+  color: #BA181B;
+}
+section.add-task-modal section.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+section.add-task-modal section.buttons button {
+  font-size: 1.5rem;
+  border-radius: 0.4rem;
+  color: #F5F3F4;
+  margin: 1rem 2rem;
+  padding: 0.5rem 1rem;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+section.add-task-modal section.buttons button.cancel-task-btn {
+  background-color: #B1A7A6;
+}
+section.add-task-modal section.buttons button.confirm-task-btn {
   background-color: #BA181B;
 }
 
@@ -298,26 +470,13 @@ main.mobile .container {
 main.mobile .container section.date {
   flex-basis: 160px;
 }
-main.mobile .container section.tasks {
-  flex-grow: 1;
-}
-main.mobile .container section.tasks div.task {
-  min-height: 40px;
-}
-main.mobile .container section.tasks div.task .left-check {
-  width: 40px;
-}
-main.mobile .container section.tasks div.task .text .title {
-  height: 40px;
-  font-size: 1.5rem;
-}
-main.mobile .container section.tasks div.task .buttons .extend-task-btn {
-  height: 40px;
-}
 main.mobile .container aside {
   flex-basis: 60px;
   background-color: #BA181B;
   align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
 }
 
 main.desktop .container {
@@ -348,24 +507,12 @@ main.desktop .container section.date {
 main.desktop .container section.tasks {
   grid-area: tasks;
 }
-main.desktop .container section.tasks div.task {
-  min-height: 80px;
-}
-main.desktop .container section.tasks div.task .left-check {
-  width: 80px;
-}
-main.desktop .container section.tasks div.task .left-check .checkbox {
-  height: 1.5rem;
-  width: 1.5rem;
-}
-main.desktop .container section.tasks div.task .text .title {
-  height: 80px;
-}
-main.desktop .container section.tasks div.task .buttons .extend-task-btn {
-  height: 80px;
-}
 main.desktop .container button.add-task-btn {
   position: absolute;
-  bottom: 50px;
-  right: 50px;
+  bottom: 2rem;
+  left: 7rem;
+  background-color: #BA181B;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
 }

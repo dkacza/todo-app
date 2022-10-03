@@ -36,8 +36,16 @@ const view = {
         <section class="date"></section>
         <section class="tasks"></section>
         <aside>
-            <button class="callendar-btn">CALLENDAR</button>
-            <button class="add-task-btn">ADD TASK</button>
+            <button class="callendar-btn">
+                <span class="material-symbols-rounded medium-large">
+                    calendar_today
+                </span>
+            </button>
+            <button class="add-task-btn">
+                <span class="material-symbols-rounded large">
+                    add
+                </span>
+        </button>
         </aside>
     </div>
     </main>`,
@@ -49,7 +57,11 @@ const view = {
         <section class="tasks"></section>
         <div class="callendar"></div>
         <aside></aside>
-        <button class="add-task-btn">ADD TASK</button>
+        <button class="add-task-btn">
+            <span class="material-symbols-rounded large">
+                add
+            </span>
+        </button>
     </div>
     </main>`,
 };

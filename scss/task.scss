@@ -1,10 +1,11 @@
 @import 'var.scss';
 
 section.tasks {
-    display: flex;
-    flex-direction: column;
     overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
     padding: 1rem;
+    
 
     div.task {
         display: flex;
@@ -14,6 +15,7 @@ section.tasks {
         margin-bottom: 0.5rem;
         max-width: 720px;
         box-shadow: 0px 0px 8.08989px rgba(0, 0, 0, 0.25);
+        min-height: max-content;
         overflow: hidden;
 
 
@@ -45,15 +47,15 @@ section.tasks {
             p.title {
                 display: flex;
                 align-items: center;
-                font-size: 2rem;
+                
                 align-self: center;
+                font-size: 2rem;
                 font-weight: bold;
                 color: $secondary3;
                 margin-left: 1rem;
             }
             p.description {
-                margin-left: 1rem;
-                margin-bottom: 1rem;
+                margin: 1.5rem 0 1.5rem 1rem;
                 display: none;
             }
         }
@@ -76,9 +78,6 @@ section.tasks {
     div.task.extended {
         height: fit-content;
         .text {
-            p.title {
-                height: 30%;
-            }
             p.description {
                 display: block;
                 
@@ -97,10 +96,14 @@ section.tasks {
         }
     }
 }
+section.tasks::-webkit-scrollbar {
+    display: none;
+  }
 
 main.mobile {
     section.tasks {
         flex-grow: 1;
+        overflow: scroll;
 
         div.task {
             min-height: 40px;
@@ -110,7 +113,7 @@ main.mobile {
             }
             .text {
                 .title {
-                    height: 40px;
+                    min-height: 40px;
                     font-size: 1.5rem;
                 }
             }
@@ -124,6 +127,7 @@ main.mobile {
 }
 main.desktop {
     section.tasks {
+        margin-bottom: 2rem;
         div.task {
             min-height: 80px;
 
@@ -136,7 +140,7 @@ main.desktop {
             }
             .text {
                 .title {
-                    height: 80px;
+                    min-height: 80px;
                 }
             }
             .buttons {
