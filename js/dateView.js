@@ -107,7 +107,7 @@ const dateView = {
         else if (currentDate.compareDates(todayDate, tommorow)) this.title = 'Yesterday';
         else this.title = weekdayNames[weekday];
 
-        this.dateString = `${this.title == weekdayStr ? '' : `${weekdayStr},`} ${dayStr} of ${monthStr}`;
+        this.dateString = `${this.title == weekdayStr ? '' : `${weekdayStr},`} ${dayStr} of ${monthStr} ${currentDate.getFullYear()}`;
     }
 }
 export default dateView;

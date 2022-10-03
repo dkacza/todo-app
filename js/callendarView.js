@@ -148,9 +148,13 @@ const callendarView = {
                 if(this.dayMatrix[i][j][0] > monthDays[this.callendarMonth]) {
                     this.dayMatrix[i][j][0] = firstNextMonthDay;
                     this.dayMatrix[i][j][1] = this.nextCallendarMonth;
-                    if(this.dayMatrix[i][j][1] == 11) {
-                        this.dayMatrix[i][j][1] = 0;
-                        this.dayMatrix[i][j][2] += 1;
+                    // if(this.dayMatrix[i][j][1] == 12) {
+                    //     this.dayMatrix[i][j][2] += 1;
+                    // }
+                    if(this.callendarMonth == 12) {
+                       this.dayMatrix[i][j][1] = 1;
+                       this.dayMatrix[i][j][2] += 1;
+                       this.nextCallendarMonth = 1;
                     }
                     firstNextMonthDay++;
                 }
