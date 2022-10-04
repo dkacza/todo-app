@@ -1,5 +1,5 @@
 import callendarView from "./callendarView.js";
-import { currentDate, Task, mainMap } from "./main.js";
+import { currentDate, Task, mainMap, STORAGE_KEY } from "./main.js";
 
 const taskView = {
     renderInitial: function() {
@@ -28,6 +28,19 @@ const taskView = {
         this.updateTaskSection();
         this.taskSection.addEventListener('click', this.handleTaskSectionClick.bind(this));
     },
+    accessLocalStorage() {
+        let textToSave = ''
+        for (const [key, entry] of mainMap.entries()) {
+            textToSave += key + ';'
+            for(const task of entry) {
+                const taskText = JSON.stringify(task);
+                textToSave += taskText + ";";
+            }
+            textToSave += '\n'
+
+        }
+        window.localStorage.setItem(STORAGE_KEY, textToSave);
+    },
     validateAndAddTask() {
         const taskName = this.taskNameInput.value;
         const taskDesc = this.taskDescInput.value;
@@ -43,6 +56,8 @@ const taskView = {
         let taskArray = mainMap.get(key);
         if(!taskArray) mainMap.set(key, [taskFromInput]);
         else mainMap.get(key).push(taskFromInput);
+        this.accessLocalStorage();
+
         this.addTaskModal.classList.remove('active');
         this.updateTaskSection();
     },
@@ -94,6 +109,7 @@ const taskView = {
             })
             mainMap.set(dateKey, newArray); 
             deleteBtn.closest('div.task').remove();
+            this.accessLocalStorage();
         }
         return;
     },
