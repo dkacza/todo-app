@@ -1,10 +1,20 @@
 @import 'var.scss';
 
 section.tasks {
+    position: relative;
     overflow: scroll;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
     padding: 1rem;
+
+    p.placeholder-msg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: $primary4;
+        font-size: 2rem;
+    }
     
 
     div.task {

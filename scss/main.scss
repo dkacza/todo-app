@@ -182,3 +182,21 @@ main.desktop {
         }
     }
 }
+main.past {
+    .container {
+        section.date {
+            color: gray;
+            h1 {
+                color: $primary4;
+            }
+        }
+        section.tasks {
+            p.placeholder-msg {
+                display: none;
+            }
+        }
+    }
+    button.add-task-btn {
+        display: none;
+    }
+}

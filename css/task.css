@@ -47,10 +47,19 @@ h3 {
   }
 }
 section.tasks {
+  position: relative;
   overflow: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   padding: 1rem;
+}
+section.tasks p.placeholder-msg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #B1A7A6;
+  font-size: 2rem;
 }
 section.tasks div.task {
   display: flex;

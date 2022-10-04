@@ -37,8 +37,10 @@ const dateView = {
         this.generateTitles();
         const dateTitleDOM = document.querySelector('.date-title');
         const dateDescDOM = document.querySelector('.date-full');
-        if(currentDate-todayDate < 0) this.dateSection.classList.add('past');
-        else this.dateSection.classList.remove('past');
+
+        if(currentDate-todayDate < 0) document.querySelector('main').classList.add('past');
+        else document.querySelector('main').classList.remove('past');
+
         dateTitleDOM.innerHTML = this.title;
         dateDescDOM.innerHTML = this.dateString;
         taskView.updateTaskSection();

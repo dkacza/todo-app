@@ -51,7 +51,11 @@ const taskView = {
         const searchKey = currentDate.stringDMY();
         const tasksForCurrentDay = mainMap.get(searchKey);
 
-        if(!tasksForCurrentDay) return;
+        if(!tasksForCurrentDay) {
+            const placeholderMessageTemplate = '<p class="placeholder-msg">Add new task by clicking + button</p>'
+            this.taskSection.insertAdjacentHTML('beforeend', placeholderMessageTemplate);
+            return;
+        }
         for(const task of tasksForCurrentDay) {
             const template = this.generateTaskTemplate(task);
             this.taskSection.insertAdjacentHTML('beforeend', template);
