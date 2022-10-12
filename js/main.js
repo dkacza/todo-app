@@ -74,6 +74,18 @@ const viewType = (window.innerWidth >= view.WIDTH_BREAKPOINT ? 'desktop' : 'mobi
 view.loadHTMLFramework(viewType);
 window.addEventListener('resize', view.checkResize.bind(view));
 
+window.addEventListener('beforeunload', () => {
+    let textToSave = ''
+    for (const [key, entry] of mainMap.entries()) {
+        textToSave += key + ';'
+        for(const task of entry) {
+            const taskText = JSON.stringify(task);
+            textToSave += taskText + ";";
+        }
+        textToSave += '\n'
 
+    }
+    window.localStorage.setItem(STORAGE_KEY, textToSave);
+})
 
 

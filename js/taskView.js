@@ -28,19 +28,6 @@ const taskView = {
         this.updateTaskSection();
         this.taskSection.addEventListener('click', this.handleTaskSectionClick.bind(this));
     },
-    accessLocalStorage() {
-        let textToSave = ''
-        for (const [key, entry] of mainMap.entries()) {
-            textToSave += key + ';'
-            for(const task of entry) {
-                const taskText = JSON.stringify(task);
-                textToSave += taskText + ";";
-            }
-            textToSave += '\n'
-
-        }
-        window.localStorage.setItem(STORAGE_KEY, textToSave);
-    },
     validateAndAddTask() {
         const taskName = this.taskNameInput.value;
         const taskDesc = this.taskDescInput.value;
@@ -56,7 +43,6 @@ const taskView = {
         let taskArray = mainMap.get(key);
         if(!taskArray) mainMap.set(key, [taskFromInput]);
         else mainMap.get(key).push(taskFromInput);
-        this.accessLocalStorage();
 
         this.addTaskModal.classList.remove('active');
         this.updateTaskSection();
