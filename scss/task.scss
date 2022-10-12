@@ -22,7 +22,7 @@ section.tasks {
         flex-direction: row; 
         background-color: $primary2;
         border-radius: 0.75rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 1rem;
         max-width: 720px;
         box-shadow: 0px 0px 8.08989px rgba(0, 0, 0, 0.25);
         min-height: max-content;
@@ -44,6 +44,10 @@ section.tasks {
                 width: 1rem;
                 border-radius: 0.25rem;
                 background-color: $primary1;
+
+                &:hover {
+                    cursor: pointer;
+                }
                 
 
                 span {

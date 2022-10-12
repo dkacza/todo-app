@@ -1,0 +1,149 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+.material-symbols-rounded {
+  font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 0, "opsz" 48;
+  font-size: 1.5rem;
+  color: #F5F3F4;
+}
+
+.material-symbols-rounded.small {
+  font-size: 1rem;
+}
+
+.material-symbols-rounded.medium-large {
+  font-size: 2rem;
+}
+
+.material-symbols-rounded.large {
+  font-size: 2.5rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  color: #161A1D;
+  font-family: "Inter", sans-serif;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 360px) {
+  html {
+    font-size: 15px;
+  }
+}
+section.callendar-modal h1 {
+  margin-top: 1rem;
+  color: #BA181B;
+  text-align: center;
+}
+section.callendar-modal p.description {
+  text-align: center;
+  margin-top: 0.25rem;
+  font-size: 1.25rem;
+}
+section.callendar-modal div.callendar {
+  margin: 0 auto;
+  margin-top: 1.5rem;
+}
+section.callendar-modal button.callendar-cancel-btn {
+  display: block;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  background-color: #B1A7A6;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #FFFFFF;
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0px 0px 2.5px 1px rgba(0, 0, 0, 0.25);
+}
+
+div.callendar {
+  grid-area: callendar;
+  display: flex;
+  align-self: flex-start;
+  justify-self: center;
+  flex-direction: column;
+  width: 320px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+}
+div.callendar section.month-year {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 20px;
+  align-items: center;
+  flex-basis: 70px;
+  background-color: #A4161A;
+  color: #F5F3F4;
+  text-align: center;
+}
+div.callendar section.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 50;
+  background-color: #F5F3F4;
+  padding: 0 8px;
+}
+div.callendar section.days div.day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.5rem;
+  height: 50px;
+}
+div.callendar section.days div.day:hover {
+  cursor: pointer;
+}
+div.callendar section.days div.day.desc {
+  font-size: 1rem;
+  color: #D3D3D3;
+}
+div.callendar section.days div.day.desc:hover {
+  cursor: default;
+}
+div.callendar section.days div.day.sun {
+  color: #BA181B;
+}
+div.callendar section.days div.day.gray {
+  color: #B1A7A6;
+}
+div.callendar section.days div.day.today {
+  z-index: 1;
+  color: #F5F3F4;
+  position: relative;
+  transform-style: preserve-3d;
+}
+div.callendar section.days div.day.today::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: "";
+  display: block;
+  width: 42px;
+  height: 42px;
+  background-color: #BA181B;
+  border-radius: 50%;
+  transform: translateZ(-1px) translate(-50%, -50%);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+}

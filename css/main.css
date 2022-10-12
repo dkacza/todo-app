@@ -1,5 +1,53 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+.material-symbols-rounded {
+  font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 0, "opsz" 48;
+  font-size: 1.5rem;
+  color: #F5F3F4;
+}
+
+.material-symbols-rounded.small {
+  font-size: 1rem;
+}
+
+.material-symbols-rounded.medium-large {
+  font-size: 2rem;
+}
+
+.material-symbols-rounded.large {
+  font-size: 2.5rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  color: #161A1D;
+  font-family: "Inter", sans-serif;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 360px) {
+  html {
+    font-size: 15px;
+  }
+}
 .material-symbols-rounded {
   font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 0, "opsz" 48;
   font-size: 1.5rem;
@@ -112,9 +160,15 @@ div.callendar section.days div.day {
   font-size: 1.5rem;
   height: 50px;
 }
+div.callendar section.days div.day:hover {
+  cursor: pointer;
+}
 div.callendar section.days div.day.desc {
   font-size: 1rem;
   color: #D3D3D3;
+}
+div.callendar section.days div.day.desc:hover {
+  cursor: default;
 }
 div.callendar section.days div.day.sun {
   color: #BA181B;
@@ -243,7 +297,7 @@ section.tasks div.task {
   flex-direction: row;
   background-color: #F5F3F4;
   border-radius: 0.75rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   max-width: 720px;
   box-shadow: 0px 0px 8.08989px rgba(0, 0, 0, 0.25);
   min-height: -webkit-max-content;
@@ -266,6 +320,9 @@ section.tasks div.task .left-check div.checkbox {
   width: 1rem;
   border-radius: 0.25rem;
   background-color: #FFFFFF;
+}
+section.tasks div.task .left-check div.checkbox:hover {
+  cursor: pointer;
 }
 section.tasks div.task .left-check div.checkbox span {
   display: none;
@@ -370,6 +427,10 @@ main.desktop section.tasks div.task .buttons .extend-task-btn {
   height: 80px;
 }
 
+body:hover {
+  cursor: default;
+}
+
 main {
   position: relative;
   width: 100vw;
@@ -380,6 +441,9 @@ main {
 button {
   border: none;
   background-color: rgba(0, 0, 0, 0);
+}
+button:hover {
+  cursor: pointer;
 }
 
 .modal {

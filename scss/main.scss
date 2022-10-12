@@ -4,6 +4,9 @@
 @import 'task.scss';
 
 // Common
+body:hover {
+    cursor: default;
+}
 main {
     position: relative;
     width: 100vw;
@@ -13,6 +16,10 @@ main {
 button {
     border: none;
     background-color: rgba(0, 0, 0, 0);
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 .modal {   
     display: none;
@@ -25,7 +32,6 @@ button {
     width: 100vw;
     height: calc(100vh - 60px);
     background-color: $primary1;
-    
 }
 main.desktop + .modal.active {
     top: 50%;
