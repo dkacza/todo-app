@@ -60,6 +60,10 @@ const taskView = {
 
         this.addTaskModal.classList.remove('active');
         this.updateTaskSection();
+
+        // Clear the input fields
+        this.taskNameInput.value = '';
+        this.taskDescInput.value = '';
     },
     updateTaskSection: function() {
         this.taskSection.innerHTML = '';
