@@ -9,7 +9,6 @@ const view = {
     loadHTMLFramework: function(viewType) {
         this.viewType = viewType;
         this.body.innerHTML = '';
-        // this.body.innerHTML = this.generateHTMLFramework(viewType);
         this.body.insertAdjacentHTML('beforeend', this.generateHTMLFramework(viewType));
 
         dateView.renderInitial();

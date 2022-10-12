@@ -2,6 +2,7 @@ import { currentDate, todayDate } from "./main.js";
 import taskView from "./taskView.js";
 
 const dateView = {
+
     // Initial date panel rendering and attaching event listeners 
     renderInitial: function() {
 
@@ -16,7 +17,6 @@ const dateView = {
         // If past add past class
         if(currentDate-todayDate < 0) this.dateSection.classList.add('past');
         else this.dateSection.classList.remove('past');
-        
 
         // Day navigation
         this.previousDayButton = document.querySelector('button.previous');
@@ -87,6 +87,9 @@ const dateView = {
                 dayStr += 'th'
                 break; 
         }
+        if(this.day >= 10 && this.day <= 20) {
+            dayStr = String(this.day) + 'th';
+        }
 
         let month = currentDate.getMonth();
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -95,8 +98,6 @@ const dateView = {
         let weekday = currentDate.getDay();
         const weekdayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const weekdayStr = weekdayNames[weekday];
-
-        
 
         let yesterday = new Date(currentDate);
         yesterday.setDate(yesterday.getDate() - 1);

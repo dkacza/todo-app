@@ -1,7 +1,8 @@
 import callendarView from "./callendarView.js";
-import { currentDate, Task, mainMap, STORAGE_KEY } from "./main.js";
+import { currentDate, Task, mainMap } from "./main.js";
 
 const taskView = {
+
     renderInitial: function() {
         this.generateAddTaskModal();
 
@@ -28,6 +29,7 @@ const taskView = {
         this.updateTaskSection();
         this.taskSection.addEventListener('click', this.handleTaskSectionClick.bind(this));
     },
+    
     validateAndAddTask() {
         const taskName = this.taskNameInput.value;
         const taskDesc = this.taskDescInput.value;
