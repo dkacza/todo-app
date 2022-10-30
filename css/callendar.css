@@ -52,23 +52,21 @@ section.callendar-modal h1 {
   text-align: center;
 }
 section.callendar-modal p.description {
-  text-align: center;
   margin-top: 0.25rem;
   font-size: 1.25rem;
+  text-align: center;
 }
 section.callendar-modal div.callendar {
-  margin: 0 auto;
-  margin-top: 1.5rem;
+  margin: 1.5 auto 0 auto;
 }
 section.callendar-modal button.callendar-cancel-btn {
   display: block;
-  margin: 0 auto;
-  margin-top: 1.5rem;
+  padding: 0.5rem 1.5rem;
+  margin: 1.5 auto 0 auto;
   background-color: #B1A7A6;
   font-size: 2rem;
   font-weight: 500;
   color: #FFFFFF;
-  padding: 0.5rem 1.5rem;
   border-radius: 8px;
   box-shadow: 0px 0px 2.5px 1px rgba(0, 0, 0, 0.25);
 }
@@ -88,9 +86,9 @@ div.callendar section.month-year {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0 20px;
   align-items: center;
   flex-basis: 70px;
+  padding: 0 20px;
   background-color: #A4161A;
   color: #F5F3F4;
   text-align: center;

@@ -155,6 +155,76 @@ section.tasks::-webkit-scrollbar {
   display: none;
 }
 
+section.add-task-modal {
+  padding: 0 1rem;
+}
+section.add-task-modal h1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: #BA181B;
+  text-align: center;
+}
+section.add-task-modal section.inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 50%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1rem;
+}
+section.add-task-modal section.inputs input.task-name {
+  border: none;
+  height: 3rem;
+  margin-bottom: 1rem;
+  box-shadow: 0px 0px 2.5022px 0.625551px rgba(0, 0, 0, 0.25);
+  border-radius: 0.5rem;
+  font-family: "Inter", sans-serif;
+  font-size: 1.4rem;
+  padding-left: 1rem;
+}
+section.add-task-modal section.inputs textarea.task-desc {
+  flex-grow: 1;
+  border: none;
+  box-shadow: 0px 0px 2.5022px 0.625551px rgba(0, 0, 0, 0.25);
+  border-radius: 0.5rem;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  padding: 1rem;
+}
+section.add-task-modal section.inputs textarea:focus, section.add-task-modal section.inputs input:focus {
+  outline-color: #BA181B;
+}
+section.add-task-modal div.text {
+  text-align: center;
+}
+section.add-task-modal div.text p {
+  font-size: 1.5rem;
+}
+section.add-task-modal div.text p.date {
+  color: #BA181B;
+}
+section.add-task-modal section.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+section.add-task-modal section.buttons button {
+  font-size: 1.5rem;
+  border-radius: 0.4rem;
+  color: #F5F3F4;
+  margin: 1rem 2rem;
+  padding: 0.5rem 1rem;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+section.add-task-modal section.buttons button.cancel-task-btn {
+  background-color: #B1A7A6;
+}
+section.add-task-modal section.buttons button.confirm-task-btn {
+  background-color: #BA181B;
+}
+
 main.mobile section.tasks {
   flex-grow: 1;
   overflow: scroll;

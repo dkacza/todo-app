@@ -34,9 +34,7 @@ button {
     background-color: $primary1;
 }
 main.desktop + .modal.active {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    @include centerAbsolute;
     width: 60vw;
     height: 65vh;
     min-height: 500px;
@@ -44,77 +42,6 @@ main.desktop + .modal.active {
     box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.4);
     border-radius: 1rem;
     padding-top: 1rem;
-}
-
-section.add-task-modal {
-    padding: 0 1rem;
-    h1 {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        color: $secondary2;
-        text-align: center;
-    }
-    section.inputs {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        height: 50%;
-        max-width: 500px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 1rem;
-
-        input.task-name {
-            border: none;
-            height: 3rem;
-            margin-bottom: 1rem;
-            box-shadow: 0px 0px 2.5022px 0.625551px rgba(0, 0, 0, 0.25);
-            border-radius: 0.5rem;
-            font-family: 'Inter', sans-serif;
-            font-size: 1.4rem;
-            padding-left: 1rem;
-        }
-        textarea.task-desc {
-            flex-grow: 1;
-            border: none;
-            box-shadow: 0px 0px 2.5022px 0.625551px rgba(0, 0, 0, 0.25);
-            border-radius: 0.5rem;
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            padding: 1rem;
-        }
-        textarea:focus, input:focus {
-            outline-color: $secondary2;
-        }
-    }
-    div.text {
-        text-align: center;
-        p {
-            font-size: 1.5rem;
-        }
-        p.date {
-            color: $secondary2;
-        }
-    }
-    section.buttons {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        button {
-            font-size: 1.5rem;
-            border-radius: 0.4rem;
-            color: $primary2;
-            margin: 1rem 2rem;
-            padding: 0.5rem 1rem;
-            box-shadow: (0px 0px 4px rgba(0, 0, 0, 0.25));
-        }
-        button.cancel-task-btn {
-            background-color: $primary4;
-        }
-        button.confirm-task-btn {
-            background-color: $secondary2;
-        }
-    }
 }
 
 // Mobile
@@ -127,13 +54,11 @@ main.mobile {
         flex-direction: column;
         justify-content: space-between;
         align-items: stretch;
-
         background-color: $primary1;
 
         section.date {
             flex-basis: 160px;
         }
-        
         aside {
             flex-basis: 60px;
             background-color: $secondary2;
