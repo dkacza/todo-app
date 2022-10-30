@@ -3,6 +3,7 @@ import { currentDate, Task, mainMap } from "./main.js";
 
 const taskView = {
 
+    // Initial task area render
     renderInitial: function() {
         this.generateAddTaskModal();
 
@@ -30,6 +31,7 @@ const taskView = {
         this.taskSection.addEventListener('click', this.handleTaskSectionClick.bind(this));
     },
     
+    // Adding new task to the main map when users confirms it
     validateAndAddTask() {
         const taskName = this.taskNameInput.value;
         const taskDesc = this.taskDescInput.value;
@@ -53,6 +55,8 @@ const taskView = {
         this.taskNameInput.value = '';
         this.taskDescInput.value = '';
     },
+
+    // Display tasks of the day
     updateTaskSection: function() {
         this.taskSection.innerHTML = '';
         const searchKey = currentDate.stringDMY();
@@ -68,6 +72,8 @@ const taskView = {
             this.taskSection.insertAdjacentHTML('beforeend', template);
         }
     },
+
+    // Handle clicking on the tasks
     handleTaskSectionClick: function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -77,7 +83,8 @@ const taskView = {
         if (extendButton) {
             extendButton.closest('div.task').classList.toggle('extended');            
         }
-            // Checkbox
+
+        // Checkbox
         const checkbox = e.target.closest('div.checkbox');
         if (checkbox) {
             checkbox.classList.toggle('active');
@@ -89,7 +96,8 @@ const taskView = {
             if (task.completion) task.completion = false;
             else task.completion = true;
         }
-            // Deleting task
+
+        // Deleting task
         const deleteBtn = e.target.closest('button.delete-task-btn');
         if (deleteBtn) {
             const dateKey = currentDate.stringDMY();
@@ -101,10 +109,11 @@ const taskView = {
             })
             mainMap.set(dateKey, newArray); 
             deleteBtn.closest('div.task').remove();
-            this.accessLocalStorage();
         }
         return;
     },
+
+    // Generate template for the modal to add task
     generateAddTaskModal: function() {
         this.addTaskModalTemplate = `
         <section class="add-task-modal modal">
@@ -123,6 +132,8 @@ const taskView = {
             </section>
         </section>`;
     },
+
+    // Generate template for the single task
     generateTaskTemplate(task) {
         const template = `
         <div class="task ${task.completion ? 'done' : ''}" data-id="${task.id}">
