@@ -14,11 +14,11 @@ const callendarView = {
         // Rendering mobile modal 
         if(view.viewType == 'mobile') {
             this.generateCallendarModalTemplate();
-            document.querySelector('body').insertAdjacentHTML('beforeend', this.callendarModalTemplate);
+            view.body.insertAdjacentHTML('beforeend', this.callendarModalTemplate);
             this.callendarModal = document.querySelector('.callendar-modal');
         }
 
-        // Initial HTML
+        // Initial HTML render
         this.callendar = document.querySelector('div.callendar');
         this.callendar.innerHTML = '';
         this.generateCallendarTemplate();

@@ -62,7 +62,7 @@ const taskView = {
         const searchKey = currentDate.stringDMY();
         const tasksForCurrentDay = mainMap.get(searchKey);
 
-        if(!tasksForCurrentDay) {
+        if(tasksForCurrentDay == undefined || tasksForCurrentDay?.length == 0) {
             const placeholderMessageTemplate = '<p class="placeholder-msg">Add new task by clicking + button</p>'
             this.taskSection.insertAdjacentHTML('beforeend', placeholderMessageTemplate);
             return;
