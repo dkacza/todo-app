@@ -38,7 +38,8 @@ export const mainMap = new Map();
 
 // Reading local storage
 const storedText = window.localStorage.getItem(STORAGE_KEY);
-const stringRecordArray = storedText.split('\n');
+let stringRecordArray = storedText?.split('\n');
+if (!stringRecordArray) stringRecordArray = [];
 for(const stringEntry of stringRecordArray) {
     if (!stringEntry) continue;
     const stringArray = stringEntry.split(';');

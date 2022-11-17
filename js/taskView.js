@@ -24,6 +24,8 @@ const taskView = {
         });
         this.cancelTaskButton.addEventListener('click', () => {
             this.addTaskModal.classList.remove('active');
+            this.taskNameInput.value = '';
+            this.taskDescInput.value = '';
         });
         this.confirmTaskButton.addEventListener('click', this.validateAndAddTask.bind(this));
 
