@@ -1,0 +1,23 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "description": "Simple todo app",
+  "main": "./js/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "live-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dkacza/todo-app.git"
+  },
+  "author": "Dawid Kacza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dkacza/todo-app/issues"
+  },
+  "homepage": "https://github.com/dkacza/todo-app#readme",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
